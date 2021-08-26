@@ -9,90 +9,18 @@
         <y>0</y>
         <label/>
         <place>
-            <id>3</id>
-            <x>-475</x>
-            <y>-338</y>
-            <label>Input (W,S,A,D)</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>4</id>
-            <x>-474</x>
-            <y>-418</y>
-            <label>Movement Behavior</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>5</id>
-            <x>-378</x>
-            <y>-250</y>
-            <label>Player Stamina</label>
-            <tokens>5</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>6</id>
-            <x>-476</x>
-            <y>-163</y>
-            <label>New Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>7</id>
-            <x>-300</x>
-            <y>-163</y>
-            <label>Item Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>8</id>
-            <x>-653</x>
-            <y>-165</y>
-            <label>Trap Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>9</id>
-            <x>-549</x>
-            <y>-165</y>
-            <label>Enemy Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>10</id>
-            <x>-393</x>
-            <y>-164</y>
-            <label>Null Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>15</id>
-            <x>-301</x>
-            <y>45</y>
-            <label>Get Item</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
             <id>16</id>
-            <x>-215</x>
-            <y>66</y>
-            <label>Item: Arrow</label>
+            <x>-214</x>
+            <y>93</y>
+            <label>#collision.blue-potion</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>17</id>
             <x>-87</x>
-            <y>88</y>
-            <label>Item: Weed</label>
+            <y>90</y>
+            <label>#collision.weed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
@@ -100,15 +28,15 @@
             <id>18</id>
             <x>-522</x>
             <y>88</y>
-            <label>Item: Blue Potion</label>
+            <label>#colliison.green-potion</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>19</id>
-            <x>-383</x>
-            <y>64</y>
-            <label>Item: Red Potion</label>
+            <x>-384</x>
+            <y>91</y>
+            <label>#collision.red-potion</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
@@ -124,8 +52,8 @@
             <id>26</id>
             <x>-387</x>
             <y>400</y>
-            <label>Player Health</label>
-            <tokens>4</tokens>
+            <label>#Player.add-health</label>
+            <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
@@ -148,15 +76,15 @@
             <id>32</id>
             <x>-213</x>
             <y>403</y>
-            <label>Player Ammo</label>
-            <tokens>4</tokens>
+            <label>#Player.add-mana</label>
+            <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>34</id>
             <x>-181</x>
             <y>253</y>
-            <label>Is at Max Ammo</label>
+            <label>Is at Max Mana</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
@@ -172,8 +100,8 @@
             <id>43</id>
             <x>-518</x>
             <y>400</y>
-            <label>Player Stamina</label>
-            <tokens>5</tokens>
+            <label>#Player.add-stamina</label>
+            <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
@@ -186,7 +114,7 @@
         </place>
         <place>
             <id>45</id>
-            <x>-131</x>
+            <x>-118</x>
             <y>252</y>
             <label/>
             <tokens>0</tokens>
@@ -196,8 +124,8 @@
             <id>46</id>
             <x>-39</x>
             <y>254</y>
-            <label>Weed Resting</label>
-            <tokens>5</tokens>
+            <label>Weed Left</label>
+            <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
@@ -212,45 +140,23 @@
             <id>49</id>
             <x>8</x>
             <y>402</y>
-            <label>Next Level</label>
+            <label>#open.portal</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>92</id>
+            <x>92</x>
+            <y>147</y>
+            <label>#reset-weed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <transition>
-            <id>2</id>
-            <x>-476</x>
-            <y>-250</y>
-            <label/>
-        </transition>
-        <transition>
-            <id>11</id>
-            <x>-395</x>
-            <y>-47</y>
-            <label>Exploring Behavior</label>
-        </transition>
-        <transition>
-            <id>12</id>
-            <x>-300</x>
-            <y>-47</y>
-            <label>Get Behavior</label>
-        </transition>
-        <transition>
-            <id>13</id>
-            <x>-550</x>
-            <y>-51</y>
-            <label>Damage Behavior</label>
-        </transition>
-        <transition>
-            <id>14</id>
-            <x>-653</x>
-            <y>-53</y>
-            <label>Environment Behavior</label>
-        </transition>
-        <transition>
             <id>20</id>
             <x>-214</x>
             <y>175</y>
-            <label>Add Arrow</label>
+            <label>Add Mana</label>
         </transition>
         <transition>
             <id>21</id>
@@ -280,7 +186,7 @@
             <id>33</id>
             <x>-211</x>
             <y>326</y>
-            <label>Ammo++</label>
+            <label>Mana++</label>
         </transition>
         <transition>
             <id>41</id>
@@ -299,6 +205,12 @@
             <x>6</x>
             <y>323</y>
             <label>Portal</label>
+        </transition>
+        <transition>
+            <id>91</id>
+            <x>17</x>
+            <y>204</y>
+            <label/>
         </transition>
         <arc>
             <type>regular</type>
@@ -410,26 +322,8 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>23</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>21</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
             <sourceId>19</sourceId>
             <destinationId>21</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>22</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
@@ -446,86 +340,20 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>20</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
             <sourceId>16</sourceId>
             <destinationId>20</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>12</sourceId>
-            <destinationId>15</destinationId>
-            <multiplicity>1</multiplicity>
+            <sourceId>91</sourceId>
+            <destinationId>46</destinationId>
+            <multiplicity>15</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>8</sourceId>
-            <destinationId>14</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>14</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>13</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>9</sourceId>
-            <destinationId>13</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>12</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>7</sourceId>
-            <destinationId>12</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>11</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>10</sourceId>
-            <destinationId>11</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>2</sourceId>
-            <destinationId>6</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>5</sourceId>
-            <destinationId>2</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>reset</type>
-            <sourceId>3</sourceId>
-            <destinationId>2</destinationId>
+            <sourceId>92</sourceId>
+            <destinationId>91</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>
