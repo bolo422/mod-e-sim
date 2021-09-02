@@ -9,609 +9,305 @@
         <y>0</y>
         <label/>
         <place>
-            <id>3</id>
-            <x>-475</x>
-            <y>-338</y>
-            <label>Input (W,S,A,D)</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>5</id>
-            <x>-378</x>
-            <y>-250</y>
-            <label>Player Stamina</label>
-            <tokens>4</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>6</id>
-            <x>-476</x>
-            <y>-163</y>
-            <label>New Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>7</id>
-            <x>-300</x>
-            <y>-163</y>
-            <label>Item Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>8</id>
-            <x>-653</x>
-            <y>-165</y>
-            <label>Trap Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>9</id>
-            <x>-549</x>
-            <y>-165</y>
-            <label>Enemy Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>10</id>
-            <x>-393</x>
-            <y>-164</y>
-            <label>Null Tile</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>15</id>
-            <x>148</x>
-            <y>-421</y>
-            <label>Get Item</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
             <id>16</id>
-            <x>234</x>
-            <y>-400</y>
-            <label>Item: Arrow</label>
+            <x>32</x>
+            <y>-1050</y>
+            <label>#colliison.blue-potion</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>17</id>
-            <x>362</x>
-            <y>-378</y>
-            <label>Item: Weed</label>
+            <x>-220</x>
+            <y>-635</y>
+            <label>#colliison.weed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>18</id>
-            <x>-73</x>
-            <y>-378</y>
-            <label>Item: Blue Potion</label>
+            <x>-142</x>
+            <y>-295</y>
+            <label>#colliison.green-potion</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>19</id>
-            <x>66</x>
-            <y>-402</y>
-            <label>Item: Red Potion</label>
+            <x>454</x>
+            <y>11</y>
+            <label>#colliison.red-potion</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>24</id>
-            <x>20</x>
-            <y>-217</y>
+            <x>425</x>
+            <y>-179</y>
             <label/>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>26</id>
-            <x>62</x>
-            <y>-66</y>
-            <label>Player Health</label>
-            <tokens>4</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
             <id>27</id>
-            <x>94</x>
-            <y>-216</y>
-            <label>Is at Max Health</label>
+            <x>520</x>
+            <y>-191</y>
+            <label>#player.GetHealth</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>35</id>
-            <x>194</x>
-            <y>-214</y>
+            <x>-15</x>
+            <y>-911</y>
             <label/>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>32</id>
-            <x>236</x>
-            <y>-63</y>
-            <label>Player Ammo</label>
-            <tokens>4</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
             <id>34</id>
-            <x>268</x>
-            <y>-213</y>
-            <label>Is at Max Ammo</label>
+            <x>60</x>
+            <y>-916</y>
+            <label>#Player.GetMana</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>40</id>
-            <x>-116</x>
-            <y>-213</y>
-            <label>Is at Max Stamina</label>
+            <x>-59</x>
+            <y>-403</y>
+            <label>#player.GetStamina</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>43</id>
-            <x>-69</x>
-            <y>-66</y>
-            <label>Player Stamina</label>
-            <tokens>5</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
             <id>42</id>
-            <x>-21</x>
-            <y>-216</y>
+            <x>19</x>
+            <y>-363</y>
             <label/>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>45</id>
-            <x>318</x>
-            <y>-214</y>
-            <label/>
+            <x>-225</x>
+            <y>-487</y>
+            <label>#add.score</label>
             <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>46</id>
-            <x>410</x>
-            <y>-212</y>
-            <label>Weed Resting</label>
-            <tokens>5</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>47</id>
-            <x>365</x>
-            <y>-66</y>
-            <label>Player Score</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>49</id>
-            <x>457</x>
-            <y>-64</y>
-            <label>Next Level</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>51</id>
-            <x>-832</x>
-            <y>79</y>
-            <label>Player Health</label>
-            <tokens>4</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>52</id>
-            <x>-913</x>
-            <y>67</y>
-            <label>Apply Damage</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>55</id>
-            <x>-993</x>
-            <y>85</y>
-            <label>Is using Shield</label>
+            <x>592</x>
+            <y>-526</y>
+            <label>#collision.enemy</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>56</id>
-            <x>-916</x>
-            <y>230</y>
-            <label>Health--</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>60</id>
-            <x>-919</x>
-            <y>395</y>
-            <label>End Game</label>
-            <tokens>0</tokens>
+            <x>560</x>
+            <y>-336</y>
+            <label>Health</label>
+            <tokens>100</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>61</id>
-            <x>-564</x>
-            <y>41</y>
+            <x>-62</x>
+            <y>-689</y>
             <label>Input (Shoot)</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>64</id>
-            <x>-396</x>
-            <y>39</y>
-            <label/>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
             <id>65</id>
-            <x>-568</x>
-            <y>213</y>
-            <label/>
+            <x>111</x>
+            <y>-690</y>
+            <label>#player.shoot</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>66</id>
-            <x>-435</x>
-            <y>130</y>
-            <label>Ammo</label>
-            <tokens>4</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>67</id>
-            <x>-473</x>
-            <y>208</y>
-            <label>Hit Enemy</label>
+            <id>87</id>
+            <x>-307</x>
+            <y>-560</y>
+            <label>#del.weed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>69</id>
-            <x>-514</x>
-            <y>359</y>
-            <label>Damage Enemy</label>
+            <id>3</id>
+            <x>263</x>
+            <y>-272</y>
+            <label>Input (W,S,A,D)</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>73</id>
-            <x>-216</x>
-            <y>20</y>
+            <id>94</id>
+            <x>348</x>
+            <y>-731</y>
+            <label>#shield-timer.enabled</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>95</id>
+            <x>236</x>
+            <y>-924</y>
             <label>Input (Shield)</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>75</id>
-            <x>-318</x>
-            <y>131</y>
-            <label>Can Use</label>
+            <id>97</id>
+            <x>352</x>
+            <y>-968</y>
+            <label>#shield.cooldown == false</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>98</id>
+            <x>462</x>
+            <y>-571</y>
+            <label>#shield.on</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>99</id>
+            <x>471</x>
+            <y>-827</y>
+            <label>#shield.cooldown == true</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>102</id>
+            <x>565</x>
+            <y>-654</y>
+            <label>#shield-timer.ended</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>103</id>
+            <x>553</x>
+            <y>-751</y>
+            <label>#shield.off</label>
             <tokens>1</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>76</id>
-            <x>-128</x>
-            <y>129</y>
-            <label>Active Cooldown</label>
-            <tokens>0</tokens>
+            <id>110</id>
+            <x>107</x>
+            <y>-821</y>
+            <label>Mana</label>
+            <tokens>100</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>77</id>
-            <x>-220</x>
-            <y>282</y>
-            <label>Shield Activated</label>
-            <tokens>0</tokens>
+            <id>111</id>
+            <x>155</x>
+            <y>-538</y>
+            <label>Stamina</label>
+            <tokens>100</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
-            <id>79</id>
-            <x>-319</x>
-            <y>389</y>
-            <label>Timer Finished</label>
+            <id>112</id>
+            <x>157</x>
+            <y>-183</y>
+            <label>#Player.raycast2D.isColliding.foward</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
-        <place>
-            <id>81</id>
-            <x>-107</x>
-            <y>389</y>
-            <label>Cooldown Finished</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <place>
-            <id>83</id>
-            <x>39</x>
-            <y>390</y>
-            <label>Shield Reseted</label>
-            <tokens>0</tokens>
-            <isStatic>false</isStatic>
-        </place>
-        <transition>
-            <id>2</id>
-            <x>-476</x>
-            <y>-250</y>
-            <label/>
-        </transition>
-        <transition>
-            <id>11</id>
-            <x>-395</x>
-            <y>-47</y>
-            <label>Exploring Behavior</label>
-        </transition>
-        <transition>
-            <id>12</id>
-            <x>-300</x>
-            <y>-47</y>
-            <label>Get Behavior</label>
-        </transition>
-        <transition>
-            <id>13</id>
-            <x>-550</x>
-            <y>-51</y>
-            <label>Damage Behavior</label>
-        </transition>
-        <transition>
-            <id>14</id>
-            <x>-653</x>
-            <y>-53</y>
-            <label>Environment Behavior</label>
-        </transition>
         <transition>
             <id>20</id>
-            <x>235</x>
-            <y>-291</y>
-            <label>Add Arrow</label>
+            <x>29</x>
+            <y>-978</y>
+            <label>Add Mana</label>
         </transition>
         <transition>
             <id>21</id>
-            <x>66</x>
-            <y>-297</y>
+            <x>450</x>
+            <y>-90</y>
             <label>Add Health</label>
         </transition>
         <transition>
             <id>22</id>
-            <x>-75</x>
-            <y>-298</y>
+            <x>-33</x>
+            <y>-299</y>
             <label>Add Stamina</label>
         </transition>
         <transition>
             <id>23</id>
-            <x>360</x>
-            <y>-304</y>
-            <label>Add Score</label>
+            <x>-222</x>
+            <y>-561</y>
+            <label/>
         </transition>
         <transition>
             <id>25</id>
-            <x>64</x>
-            <y>-143</y>
+            <x>471</x>
+            <y>-266</y>
             <label>Health++</label>
         </transition>
         <transition>
             <id>33</id>
-            <x>238</x>
-            <y>-140</y>
-            <label>Ammo++</label>
+            <x>1</x>
+            <y>-829</y>
+            <label>Mana++</label>
         </transition>
         <transition>
             <id>41</id>
-            <x>-67</x>
-            <y>-143</y>
+            <x>49</x>
+            <y>-448</y>
             <label>Stamina++</label>
         </transition>
         <transition>
-            <id>44</id>
-            <x>366</x>
-            <y>-143</y>
-            <label>Weed++</label>
-        </transition>
-        <transition>
-            <id>48</id>
-            <x>455</x>
-            <y>-143</y>
-            <label>Portal</label>
-        </transition>
-        <transition>
             <id>53</id>
-            <x>-916</x>
-            <y>159</y>
+            <x>591</x>
+            <y>-460</y>
             <label/>
-        </transition>
-        <transition>
-            <id>59</id>
-            <x>-919</x>
-            <y>320</y>
-            <label>Zero Health</label>
         </transition>
         <transition>
             <id>63</id>
-            <x>-566</x>
-            <y>133</y>
+            <x>4</x>
+            <y>-690</y>
             <label> Shoot</label>
         </transition>
         <transition>
-            <id>68</id>
-            <x>-512</x>
-            <y>280</y>
-            <label>Collision Enemy</label>
-        </transition>
-        <transition>
-            <id>74</id>
-            <x>-218</x>
-            <y>129</y>
-            <label>Use Shield</label>
-        </transition>
-        <transition>
-            <id>78</id>
-            <x>-316</x>
-            <y>283</y>
-            <label>Timer: Shield Enabled</label>
-        </transition>
-        <transition>
-            <id>80</id>
-            <x>-222</x>
-            <y>389</y>
-            <label>Begin Skill Cooldown</label>
-        </transition>
-        <transition>
-            <id>82</id>
-            <x>-29</x>
-            <y>391</y>
+            <id>2</id>
+            <x>161</x>
+            <y>-273</y>
             <label/>
         </transition>
         <transition>
-            <id>84</id>
-            <x>40</x>
-            <y>261</y>
+            <id>96</id>
+            <x>352</x>
+            <y>-826</y>
             <label/>
         </transition>
-        <arc>
-            <type>regular</type>
-            <sourceId>80</sourceId>
-            <destinationId>81</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>84</sourceId>
-            <destinationId>75</destinationId>
-            <multiplicity>1</multiplicity>
-            <breakPoint>
-                <x>40</x>
-                <y>193</y>
-            </breakPoint>
-            <breakPoint>
-                <x>-316</x>
-                <y>193</y>
-            </breakPoint>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>83</sourceId>
-            <destinationId>84</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>82</sourceId>
-            <destinationId>83</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>81</sourceId>
-            <destinationId>82</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>76</sourceId>
-            <destinationId>82</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>80</sourceId>
-            <destinationId>76</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>79</sourceId>
-            <destinationId>80</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>78</sourceId>
-            <destinationId>79</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>77</sourceId>
-            <destinationId>78</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>74</sourceId>
-            <destinationId>77</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>inhibitor</type>
-            <sourceId>76</sourceId>
-            <destinationId>74</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>75</sourceId>
-            <destinationId>74</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>64</sourceId>
-            <destinationId>74</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>reset</type>
-            <sourceId>73</sourceId>
-            <destinationId>74</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>68</sourceId>
-            <destinationId>69</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>67</sourceId>
-            <destinationId>68</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>reset</type>
-            <sourceId>65</sourceId>
-            <destinationId>68</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>66</sourceId>
-            <destinationId>63</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
+        <transition>
+            <id>100</id>
+            <x>350</x>
+            <y>-626</y>
+            <label>Shield On</label>
+        </transition>
+        <transition>
+            <id>105</id>
+            <x>471</x>
+            <y>-704</y>
+            <label>Shield off</label>
+        </transition>
+        <transition>
+            <id>107</id>
+            <x>468</x>
+            <y>-968</y>
+            <label/>
+        </transition>
         <arc>
             <type>regular</type>
             <sourceId>63</sourceId>
@@ -620,74 +316,8 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>64</sourceId>
-            <destinationId>63</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>11</sourceId>
-            <destinationId>64</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>reset</type>
             <sourceId>61</sourceId>
             <destinationId>63</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>14</sourceId>
-            <destinationId>52</destinationId>
-            <multiplicity>1</multiplicity>
-            <breakPoint>
-                <x>-695</x>
-                <y>33</y>
-            </breakPoint>
-            <breakPoint>
-                <x>-882</x>
-                <y>34</y>
-            </breakPoint>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>59</sourceId>
-            <destinationId>60</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>reset</type>
-            <sourceId>56</sourceId>
-            <destinationId>59</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>inhibitor</type>
-            <sourceId>51</sourceId>
-            <destinationId>59</destinationId>
-            <multiplicity>1</multiplicity>
-            <breakPoint>
-                <x>-834</x>
-                <y>321</y>
-            </breakPoint>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>53</sourceId>
-            <destinationId>56</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>inhibitor</type>
-            <sourceId>55</sourceId>
-            <destinationId>53</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>51</sourceId>
-            <destinationId>53</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
@@ -698,107 +328,7 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>13</sourceId>
-            <destinationId>52</destinationId>
-            <multiplicity>1</multiplicity>
-            <breakPoint>
-                <x>-551</x>
-                <y>18</y>
-            </breakPoint>
-            <breakPoint>
-                <x>-927</x>
-                <y>21</y>
-            </breakPoint>
-        </arc>
-        <arc>
-            <type>reset</type>
-            <sourceId>3</sourceId>
-            <destinationId>2</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>5</sourceId>
-            <destinationId>2</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>2</sourceId>
-            <destinationId>6</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>10</sourceId>
-            <destinationId>11</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>11</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>7</sourceId>
-            <destinationId>12</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>12</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>9</sourceId>
-            <destinationId>13</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>13</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>6</sourceId>
-            <destinationId>14</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>8</sourceId>
-            <destinationId>14</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>12</sourceId>
-            <destinationId>15</destinationId>
-            <multiplicity>1</multiplicity>
-            <breakPoint>
-                <x>-184</x>
-                <y>3</y>
-            </breakPoint>
-            <breakPoint>
-                <x>150</x>
-                <y>3</y>
-            </breakPoint>
-        </arc>
-        <arc>
-            <type>regular</type>
             <sourceId>16</sourceId>
-            <destinationId>20</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>15</sourceId>
             <destinationId>20</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
@@ -816,26 +346,8 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>22</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
             <sourceId>19</sourceId>
             <destinationId>21</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>21</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>15</sourceId>
-            <destinationId>23</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
@@ -851,12 +363,6 @@
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
-            <type>regular</type>
-            <sourceId>25</sourceId>
-            <destinationId>26</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
             <type>inhibitor</type>
             <sourceId>27</sourceId>
             <destinationId>25</destinationId>
@@ -866,12 +372,6 @@
             <type>inhibitor</type>
             <sourceId>34</sourceId>
             <destinationId>33</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
-            <sourceId>33</sourceId>
-            <destinationId>32</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
@@ -900,12 +400,6 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>41</sourceId>
-            <destinationId>43</destinationId>
-            <multiplicity>1</multiplicity>
-        </arc>
-        <arc>
-            <type>regular</type>
             <sourceId>22</sourceId>
             <destinationId>42</destinationId>
             <multiplicity>1</multiplicity>
@@ -918,32 +412,150 @@
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>45</sourceId>
-            <destinationId>44</destinationId>
+            <sourceId>23</sourceId>
+            <destinationId>87</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>46</sourceId>
-            <destinationId>44</destinationId>
+            <sourceId>3</sourceId>
+            <destinationId>2</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>44</sourceId>
-            <destinationId>47</destinationId>
+            <sourceId>97</sourceId>
+            <destinationId>96</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>95</sourceId>
+            <destinationId>96</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>96</sourceId>
+            <destinationId>94</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>inhibitor</type>
-            <sourceId>46</sourceId>
-            <destinationId>48</destinationId>
+            <sourceId>99</sourceId>
+            <destinationId>96</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
-            <sourceId>48</sourceId>
-            <destinationId>49</destinationId>
+            <sourceId>94</sourceId>
+            <destinationId>100</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>100</sourceId>
+            <destinationId>98</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>98</sourceId>
+            <destinationId>105</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>102</sourceId>
+            <destinationId>105</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>105</sourceId>
+            <destinationId>99</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>105</sourceId>
+            <destinationId>103</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>reset</type>
+            <sourceId>99</sourceId>
+            <destinationId>107</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>97</sourceId>
+            <destinationId>107</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>inhibitor</type>
+            <sourceId>98</sourceId>
+            <destinationId>53</destinationId>
+            <multiplicity>1</multiplicity>
+            <breakPoint>
+                <x>459</x>
+                <y>-461</y>
+            </breakPoint>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>110</sourceId>
+            <destinationId>96</destinationId>
+            <multiplicity>20</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>110</sourceId>
+            <destinationId>63</destinationId>
+            <multiplicity>5</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>33</sourceId>
+            <destinationId>110</destinationId>
+            <multiplicity>20</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>56</sourceId>
+            <destinationId>53</destinationId>
+            <multiplicity>20</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>25</sourceId>
+            <destinationId>56</destinationId>
+            <multiplicity>20</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>111</sourceId>
+            <destinationId>96</destinationId>
+            <multiplicity>20</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>41</sourceId>
+            <destinationId>111</destinationId>
+            <multiplicity>30</multiplicity>
+        </arc>
+        <arc>
+            <type>inhibitor</type>
+            <sourceId>112</sourceId>
+            <destinationId>2</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>111</sourceId>
+            <destinationId>2</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>
