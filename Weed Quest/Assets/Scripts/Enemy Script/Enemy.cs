@@ -1,53 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RdPengine;
 
-public enum EnemyState
-{
-    idle,
-    walk,
-    attack,
-    stagger
-}
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyState currentState;
-    public float maxHealth;
-    public float health;
-    public string enemyName;
-    public int baseAttack;
-    public float moveSpeed;
-
-    private void Awake()
+    public float speed;
+    public Vector3 direction = Vector3.up;//(0,0,0)
+    bool running = false;
+    Vector3 destination;
+    Rigidbody2D rb;
+    // Start is called before the first frame update
+    void Start()
     {
-        health = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void TakeDamage(float damage)
+    // Update is called once per frame
+    void Update()
     {
-        health -= damage;
-        if (health <= 0)
+        if (!running)
         {
-            this.gameObject.SetActive(false);
+            StartCoroutine(changeDirection());
         }
+        //destination = transform.position + direction;
+        //transform.position += direction * speed;
+        //transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime*2);
+        //rb.AddForce(direction * speed,ForceMode2D.Impulse);
+        rb.velocity += new Vector2(direction.x, direction.y) * Time.deltaTime;
     }
-
-    public void Knock(Rigidbody2D myRigidbody, float knockTime, float damage)
+    IEnumerator changeDirection()
     {
-        StartCoroutine(KnockCo(myRigidbody, knockTime));
-        TakeDamage(damage);
-    }
-
-    private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
-    {
-        if (myRigidbody != null)
-        {
-            yield return new WaitForSeconds(knockTime);
-            myRigidbody.velocity = Vector2.zero;
-            currentState = EnemyState.idle;
-            myRigidbody.velocity = Vector2.zero;
-
-        }
+        running = true;
+        yield return new WaitForSeconds(1);
+        direction.x = Random.Range(-1, 2);
+        direction.y = Random.Range(-1, 2);
+        running = false;
     }
 }

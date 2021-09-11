@@ -8,6 +8,7 @@ TagManager:
   - potSP
   - potStamina
   - weed
+  - enemy
   layers:
   - Default
   - TransparentFX
