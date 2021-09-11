@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public PetriNet playerNet; // a rede de Petri do objeto do Player
-    public float speed; // velocidade, afeta movimentação
+    public float speed = 0.05f; // velocidade, afeta movimentação
 
     private Rigidbody2D rb2d; // rigidbody do objeto do Player
     // NÃO ESQUECER DE CRIAR O BENDITO RIGIDBODY2d -b
@@ -65,12 +65,12 @@ public class Player : MonoBehaviour
     {
         checkForSurplus();
         updateTexts();
-
+       
         float horizontalImpulse = Input.GetAxis("Horizontal");
         float verticalImpulse = Input.GetAxis("Vertical");
-        Vector2 impulse = new Vector2(horizontalImpulse, verticalImpulse);
+        Vector3 impulse = new Vector3(horizontalImpulse, verticalImpulse, 0);
 
-        GetComponent<Rigidbody2D>().AddForce(impulse * speed);
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + impulse * speed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // primariamente colisão com o Inimigo (ou unicamente?)
