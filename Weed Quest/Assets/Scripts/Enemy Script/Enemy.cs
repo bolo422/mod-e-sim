@@ -13,7 +13,7 @@ public enum EnemyState
 public class Enemy : MonoBehaviour
 {
     public EnemyState currentState;
-    public FloatValue maxHealth;
+    public float maxHealth;
     public float health;
     public string enemyName;
     public int baseAttack;
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        health = maxHealth.initialValue;
+        health = maxHealth;
     }
 
     private void TakeDamage(float damage)
