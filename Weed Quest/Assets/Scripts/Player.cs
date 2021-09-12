@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     public Text staminaText;
     public Text weedText;
 
+    public bool shield;
+
     // A definir:
 
     // Se o jogo usar um Manager, a quantia de Weeds coletadas não pode ficar aqui, em cujo caso teria
@@ -69,22 +71,18 @@ public class Player : MonoBehaviour
         float horizontalImpulse = Input.GetAxis("Horizontal");
         float verticalImpulse = Input.GetAxis("Vertical");
         Vector3 impulse = new Vector3(horizontalImpulse, verticalImpulse, 0);
-
+        
         GetComponent<Rigidbody2D>().MovePosition(transform.position + impulse * speed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // primariamente colisão com o Inimigo (ou unicamente?)
     {
-        if (collision.gameObject.CompareTag("enemy"))
-        {
-            // Assume que o Inimigo terá uma RdP
-
-            /*if (other.gameObject.CompareTag(("Enemy")))
-            {
-            PetriNet pn = other.gameObject.GetComponent<Npc1Controller>().npc;
-            player.GetPlaceByLabel("#CollisionWithEnemy").AddTokens(1, pn);
-            }*/
-        }
+        //if (collision.gameObject.CompareTag("enemy"))
+        //{
+        //    //Debug.Log(collision);
+        //    PetriNet pn = other.gameObject.GetComponent<Npc1Controller>().npc;
+        //    player.GetPlaceByLabel("#CollisionWithEnemy").AddTokens(1, pn);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision) // poções, potencialmente Weed, portais
@@ -93,6 +91,7 @@ public class Player : MonoBehaviour
         {
             collision.gameObject.SetActive(false); // desabilita a poção, para não ser coletada 2 vezes
             playerNet.GetPlaceByLabel("#@HPPot").AddTokens(10);
+            
         }
         else if (collision.gameObject.CompareTag("potSP"))
         {

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int damage = 100; 
     private Vector3 sDirection;
 
     void Setup(Vector3 sDirection)
-    {
+    {        
         //this.sDirection = sDirection;
 
         //Vector3 normDirection = sDirection.normalized;
@@ -19,6 +20,7 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        name = "projectile";
         Destroy(gameObject, 1.5f);
     }
 

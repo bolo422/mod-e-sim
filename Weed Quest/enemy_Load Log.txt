@@ -1,0 +1,1 @@
+Log: File reading events...id:	x:	y:	label:	place:	place:	place:	place:	place:	place:	transition:	transition:	transition:	arc:	arc:	arc:	arc:	arc:	arc:	arc:	arc:	
