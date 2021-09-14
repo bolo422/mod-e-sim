@@ -77,7 +77,7 @@ public class EnemyShooter : MonoBehaviour
             enemyNet.GetPlaceByLabel("#collision.player").AddTokens(1);
             GameObject other = collision.gameObject;
 
-            if (!other.GetComponent<Player>().shield)
+            if (other.GetComponent<Player>().playerNet.GetPlaceByLabel("Shield").Tokens != 1)
                 other.GetComponent<Player>().playerNet.GetPlaceByLabel("#RemoveHP").AddTokens(damage);
            
         }

@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2d; // rigidbody do objeto do Player
     // NÃO ESQUECER DE CRIAR O BENDITO RIGIDBODY2d -b
 
+    public GameObject shieldComponent;
+
     public int maxHP; // define HP máxima do jogador
     public int maxSP; // define Mana máxima do jogador
     public int maxStamina; // define Stamina máxima do jogador
@@ -23,14 +25,13 @@ public class Player : MonoBehaviour
     public Place SP; // a Mana do jogador
     public Place Stamina; // a Stamina do jogador
     public Place Weed; // a quantia de Weed que o jogador coletou
+    public Place Shield;
 
     // Textos a serem atualizados, itens de UI, provavelmente não deviam estar aqui, mas a fins de praticidade:
     public Text hpText;
     public Text spText;
     public Text staminaText;
     public Text weedText;
-
-    public bool shield;
 
     // A definir:
 
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
         SP = playerNet.GetPlaceByLabel("Mana");
         Stamina = playerNet.GetPlaceByLabel("Stamina");
         Weed = playerNet.GetPlaceByLabel("Weed");
+        Shield = playerNet.GetPlaceByLabel("Shield");
 
         // Seta esses valores para o máximo definido nas devidas variáveis
 
@@ -67,12 +69,20 @@ public class Player : MonoBehaviour
     {
         checkForSurplus();
         updateTexts();
-       
+
         float horizontalImpulse = Input.GetAxis("Horizontal");
         float verticalImpulse = Input.GetAxis("Vertical");
         Vector3 impulse = new Vector3(horizontalImpulse, verticalImpulse, 0);
-        
+
         GetComponent<Rigidbody2D>().MovePosition(transform.position + impulse * speed);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (SP.Tokens >= 10 && Shield.Tokens != 1)
+            {
+                StartCoroutine(StartShields());
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // primariamente colisão com o Inimigo (ou unicamente?)
@@ -91,7 +101,7 @@ public class Player : MonoBehaviour
         {
             collision.gameObject.SetActive(false); // desabilita a poção, para não ser coletada 2 vezes
             playerNet.GetPlaceByLabel("#@HPPot").AddTokens(10);
-            
+
         }
         else if (collision.gameObject.CompareTag("potSP"))
         {
@@ -119,10 +129,10 @@ public class Player : MonoBehaviour
     {
         while (HP.Tokens > 0)
         {
-            if(maxSP > SP.Tokens)
+            if (maxSP > SP.Tokens)
             {
                 // Garantir que o nodo dentro da RdP tem esse nome, é suposto a ser o "aviso" que um tick ocorreu
-                playerNet.GetPlaceByLabel("#ManaRegen").Tokens = 1; 
+                playerNet.GetPlaceByLabel("#ManaRegen").Tokens = 1;
             }
             // mudar "5" para a quantia de segundos entre cada tick de Mana
             yield return new WaitForSeconds(5);
@@ -135,9 +145,21 @@ public class Player : MonoBehaviour
         {
             // Mesmo princípio da função acima, mudar "1" para a quantia de segundos entre cada tick de Stamina
             yield return new WaitForSeconds(3);
-            
+
             playerNet.GetPlaceByLabel("#StaminaTick").Tokens = 1;
         }
+    }
+
+    IEnumerator StartShields()
+    {
+        playerNet.GetPlaceByLabel("#ActivateShield").Tokens = 1;
+        shieldComponent.SetActive(true);
+        playerNet.GetPlaceByLabel("#RemoveMana").Tokens = 10;
+
+        yield return new WaitForSeconds(5);
+
+        playerNet.GetPlaceByLabel("#ShieldTimeout").Tokens = 1;
+        shieldComponent.SetActive(false);
     }
 
     void updateTexts()

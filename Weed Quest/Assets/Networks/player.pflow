@@ -10,327 +10,371 @@
         <label/>
         <place>
             <id>16</id>
-            <x>-387</x>
-            <y>-293</y>
+            <x>-471</x>
+            <y>-483</y>
             <label>#@ManaPot</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>17</id>
-            <x>-279</x>
-            <y>-286</y>
+            <x>-363</x>
+            <y>-476</y>
             <label>#@WeedPickup</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>18</id>
-            <x>-869</x>
-            <y>-291</y>
+            <x>-953</x>
+            <y>-481</y>
             <label>#@StamPot</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>19</id>
-            <x>-637</x>
-            <y>-284</y>
+            <x>-721</x>
+            <y>-474</y>
             <label>#@HPPot</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>24</id>
-            <x>-638</x>
-            <y>-108</y>
+            <x>-722</x>
+            <y>-298</y>
             <label>#AddHP</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>26</id>
-            <x>-636</x>
-            <y>57</y>
+            <x>-720</x>
+            <y>-133</y>
             <label>HP</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>35</id>
-            <x>-385</x>
-            <y>-116</y>
+            <x>-469</x>
+            <y>-306</y>
             <label>#AddMana</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>32</id>
-            <x>-424</x>
-            <y>49</y>
+            <x>-508</x>
+            <y>-141</y>
             <label>Mana</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>43</id>
-            <x>-874</x>
-            <y>51</y>
+            <x>-958</x>
+            <y>-139</y>
             <label>Stamina</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>42</id>
-            <x>-868</x>
-            <y>-112</y>
+            <x>-952</x>
+            <y>-302</y>
             <label>#AddStamina</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>45</id>
-            <x>-277</x>
-            <y>-127</y>
+            <x>-361</x>
+            <y>-317</y>
             <label>#AddWeed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>46</id>
-            <x>-165</x>
-            <y>-131</y>
+            <x>-249</x>
+            <y>-321</y>
             <label>WeedLeft</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>47</id>
-            <x>-225</x>
-            <y>25</y>
+            <x>-309</x>
+            <y>-165</y>
             <label>Weed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>49</id>
-            <x>-129</x>
-            <y>27</y>
+            <x>-213</x>
+            <y>-163</y>
             <label>Next Level</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>53</id>
-            <x>-472</x>
-            <y>-117</y>
+            <x>-556</x>
+            <y>-307</y>
             <label>#ManaRegen</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>55</id>
-            <x>-958</x>
-            <y>52</y>
+            <x>-1042</x>
+            <y>-138</y>
             <label>#StaminaTick</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>57</id>
-            <x>-881</x>
-            <y>207</y>
+            <x>-965</x>
+            <y>17</y>
             <label>Stamina Waste</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>58</id>
-            <x>-705</x>
-            <y>55</y>
+            <x>-789</x>
+            <y>-135</y>
             <label>#DamageTaken</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>60</id>
-            <x>-639</x>
-            <y>212</y>
+            <x>-723</x>
+            <y>22</y>
             <label>Health Waste</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>68</id>
-            <x>-161</x>
-            <y>-280</y>
+            <x>-245</x>
+            <y>-470</y>
             <label>#ResetWeed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>69</id>
-            <x>-500</x>
-            <y>49</y>
+            <x>-584</x>
+            <y>-141</y>
             <label>#ProjectileFired</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>70</id>
-            <x>-435</x>
-            <y>209</y>
+            <x>-519</x>
+            <y>19</y>
             <label>Mana Waste</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>79</id>
-            <x>-345</x>
-            <y>49</y>
+            <x>-429</x>
+            <y>-141</y>
             <label>#RemoveMana</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>80</id>
-            <x>-797</x>
-            <y>52</y>
+            <x>-881</x>
+            <y>-138</y>
             <label>#RemoveStamina</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>81</id>
-            <x>-577</x>
-            <y>54</y>
+            <x>-661</x>
+            <y>-136</y>
             <label>#RemoveHP</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>84</id>
-            <x>-284</x>
-            <y>27</y>
+            <x>-368</x>
+            <y>-163</y>
             <label>#DumpWeed</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <place>
             <id>86</id>
-            <x>-259</x>
-            <y>171</y>
+            <x>-343</x>
+            <y>-19</y>
             <label>TotalWeed</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>87</id>
+            <x>-841</x>
+            <y>32</y>
+            <label>#ActivateShield</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>89</id>
+            <x>-838</x>
+            <y>226</y>
+            <label>Shield</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>90</id>
+            <x>-906</x>
+            <y>228</y>
+            <label>#ShieldTimeout</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>92</id>
+            <x>-869</x>
+            <y>379</y>
+            <label>Total Shields Used</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
         <transition>
             <id>20</id>
-            <x>-386</x>
-            <y>-208</y>
+            <x>-470</x>
+            <y>-398</y>
             <label>Add Mana</label>
         </transition>
         <transition>
             <id>21</id>
-            <x>-637</x>
-            <y>-201</y>
+            <x>-721</x>
+            <y>-391</y>
             <label>Add Health</label>
         </transition>
         <transition>
             <id>22</id>
-            <x>-869</x>
-            <y>-210</y>
+            <x>-953</x>
+            <y>-400</y>
             <label>Add Stamina</label>
         </transition>
         <transition>
             <id>23</id>
-            <x>-277</x>
-            <y>-206</y>
+            <x>-361</x>
+            <y>-396</y>
             <label>Add Weed</label>
         </transition>
         <transition>
             <id>25</id>
-            <x>-637</x>
-            <y>-23</y>
+            <x>-721</x>
+            <y>-213</y>
             <label>Health++</label>
         </transition>
         <transition>
             <id>33</id>
-            <x>-385</x>
-            <y>-23</y>
+            <x>-469</x>
+            <y>-213</y>
             <label>Mana++</label>
         </transition>
         <transition>
             <id>41</id>
-            <x>-872</x>
-            <y>-26</y>
+            <x>-956</x>
+            <y>-216</y>
             <label>Stamina++</label>
         </transition>
         <transition>
             <id>44</id>
-            <x>-227</x>
-            <y>-49</y>
+            <x>-311</x>
+            <y>-239</y>
             <label>Weed++</label>
         </transition>
         <transition>
             <id>48</id>
-            <x>-127</x>
-            <y>-47</y>
+            <x>-211</x>
+            <y>-237</y>
             <label>Portal</label>
         </transition>
         <transition>
             <id>54</id>
-            <x>-471</x>
-            <y>-25</y>
+            <x>-555</x>
+            <y>-215</y>
             <label>Natural Mana Regen</label>
         </transition>
         <transition>
             <id>56</id>
-            <x>-916</x>
-            <y>126</y>
+            <x>-1000</x>
+            <y>-64</y>
             <label>Stamina Decay</label>
         </transition>
         <transition>
             <id>59</id>
-            <x>-675</x>
-            <y>129</y>
+            <x>-759</x>
+            <y>-61</y>
             <label>Health Decay</label>
         </transition>
         <transition>
             <id>67</id>
-            <x>-162</x>
-            <y>-208</y>
+            <x>-246</x>
+            <y>-398</y>
             <label>Reset Weed</label>
         </transition>
         <transition>
             <id>71</id>
-            <x>-472</x>
-            <y>126</y>
+            <x>-556</x>
+            <y>-64</y>
             <label>Mana Decay</label>
         </transition>
         <transition>
             <id>78</id>
-            <x>-388</x>
-            <y>127</y>
+            <x>-472</x>
+            <y>-63</y>
             <label>Removing Mana</label>
         </transition>
         <transition>
             <id>82</id>
-            <x>-601</x>
-            <y>130</y>
+            <x>-685</x>
+            <y>-60</y>
             <label>Remove HP</label>
         </transition>
         <transition>
             <id>83</id>
-            <x>-835</x>
-            <y>126</y>
+            <x>-919</x>
+            <y>-64</y>
             <label>Remove Stamina</label>
         </transition>
         <transition>
             <id>85</id>
-            <x>-258</x>
-            <y>94</y>
+            <x>-342</x>
+            <y>-96</y>
             <label>Dumping Weed</label>
+        </transition>
+        <transition>
+            <id>88</id>
+            <x>-839</x>
+            <y>132</y>
+            <label>Activating Shield</label>
+        </transition>
+        <transition>
+            <id>91</id>
+            <x>-869</x>
+            <y>299</y>
+            <label>Shield Timed Out</label>
         </transition>
         <arc>
             <type>regular</type>
@@ -594,6 +638,36 @@
             <type>regular</type>
             <sourceId>48</sourceId>
             <destinationId>49</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>87</sourceId>
+            <destinationId>88</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>88</sourceId>
+            <destinationId>89</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>89</sourceId>
+            <destinationId>91</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>90</sourceId>
+            <destinationId>91</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>91</sourceId>
+            <destinationId>92</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>

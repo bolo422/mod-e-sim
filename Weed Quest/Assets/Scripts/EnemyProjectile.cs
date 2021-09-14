@@ -42,7 +42,7 @@ public class EnemyProjectile : MonoBehaviour
         { 
             GameObject other = collision.gameObject;
 
-            if (!other.GetComponent<Player>().shield)
+            if (other.GetComponent<Player>().playerNet.GetPlaceByLabel("Shield").Tokens != 1)
                 //Destroy(other);
                 other.GetComponent<Player>().playerNet.GetPlaceByLabel("#RemoveHP").AddTokens(damage);
 
