@@ -593,7 +593,10 @@ MonoBehaviour:
   maxHP: 25
   maxSP: 25
   maxStamina: 25
-  maxWeed: 5
+  maxWeed: 1
+  portalPrefab: {fileID: 1523311400100793365, guid: 9174781a915f3d043bb6551ecdcd9085,
+    type: 3}
+  portalCreated: 0
   hpText: {fileID: 1622232896}
   spText: {fileID: 1301323871}
   staminaText: {fileID: 549026102}
@@ -1430,7 +1433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1084914122
 Transform:
   m_ObjectHideFlags: 0
