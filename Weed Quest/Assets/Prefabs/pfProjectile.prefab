@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0091ce8b69914894581b8f02b52801b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 35
 --- !u!61 &8892379955183562978
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,8 +18,8 @@
         </place>
         <place>
             <id>16</id>
-            <x>-292</x>
-            <y>-88</y>
+            <x>-294</x>
+            <y>-96</y>
             <label>#collision.player.damage(int)</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
@@ -42,8 +42,8 @@
         </place>
         <place>
             <id>20</id>
-            <x>-471</x>
-            <y>-138</y>
+            <x>-473</x>
+            <y>-132</y>
             <label>#collision.arrow</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
@@ -53,6 +53,30 @@
             <x>-400</x>
             <y>-376</y>
             <label>#AddHP</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>30</id>
+            <x>-554</x>
+            <y>-220</y>
+            <label>Dano</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>32</id>
+            <x>-406</x>
+            <y>42</y>
+            <label>IsDead</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>33</id>
+            <x>-523</x>
+            <y>-33</y>
+            <label>#Initialize</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
@@ -74,11 +98,23 @@
             <y>-307</y>
             <label>Health++</label>
         </transition>
+        <transition>
+            <id>31</id>
+            <x>-405</x>
+            <y>-34</y>
+            <label/>
+        </transition>
+        <arc>
+            <type>regular</type>
+            <sourceId>33</sourceId>
+            <destinationId>31</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
         <arc>
             <type>regular</type>
             <sourceId>14</sourceId>
             <destinationId>21</destinationId>
-            <multiplicity>20</multiplicity>
+            <multiplicity>1</multiplicity>
         </arc>
         <arc>
             <type>regular</type>
@@ -90,10 +126,10 @@
             <type>regular</type>
             <sourceId>14</sourceId>
             <destinationId>15</destinationId>
-            <multiplicity>20</multiplicity>
+            <multiplicity>1</multiplicity>
         </arc>
         <arc>
-            <type>reset</type>
+            <type>regular</type>
             <sourceId>19</sourceId>
             <destinationId>15</destinationId>
             <multiplicity>1</multiplicity>
@@ -120,6 +156,24 @@
             <type>regular</type>
             <sourceId>29</sourceId>
             <destinationId>14</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>21</sourceId>
+            <destinationId>30</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>inhibitor</type>
+            <sourceId>14</sourceId>
+            <destinationId>31</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>31</sourceId>
+            <destinationId>32</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>

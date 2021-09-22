@@ -26,6 +26,7 @@ public class EnemyShooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(Initialize());
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyNet = new PetriNet("Assets/Networks/enemy.pflow");
         HP = enemyNet.GetPlaceByLabel("HP");
@@ -86,14 +87,24 @@ public class EnemyShooter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) // Tiros
     {
-       
+
         if (collision.gameObject.name == "projectile")
         {
-            Debug.Log(collision.gameObject.name);
-            Destroy(gameObject);
+            Debug.Log(HP.Tokens);
+            enemyNet.GetPlaceByLabel("#collision.arrow").Tokens = collision.gameObject.GetComponent<Projectile>().damage;
+            Destroy(collision.gameObject);
+            if (enemyNet.GetPlaceByLabel("IsDead").Tokens > 0)
+            {
+                Destroy(gameObject);
+            }
+
         }
     }
 
-
+    IEnumerator Initialize()
+    {
+        yield return new WaitForSeconds(1);
+        enemyNet.GetPlaceByLabel("#Initialize").Tokens = 1;
+    }
 
 }

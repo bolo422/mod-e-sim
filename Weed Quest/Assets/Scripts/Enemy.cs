@@ -16,16 +16,19 @@ public class Enemy : MonoBehaviour
     public int maxHP; // define HP máxima do jogador
     public Place HP; // a HP do jogador
     public int damage;
+    
+    
 
 
-// Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(Initialize());
         enemyNet = new PetriNet("Assets/Networks/enemy.pflow");
         rb = GetComponent<Rigidbody2D>();
 
         HP = enemyNet.GetPlaceByLabel("HP");
-        enemyNet.GetPlaceByLabel("#AddHP").AddTokens(maxHP);
+        enemyNet.GetPlaceByLabel("#AddHP").Tokens = maxHP;
         Debug.Log(enemyNet.GetPlaceByLabel("HP").Tokens);
 
     }
@@ -62,11 +65,22 @@ public class Enemy : MonoBehaviour
        
         if (collision.gameObject.name == "projectile")
         {
-            Debug.Log(collision.gameObject.name);
-            Destroy(gameObject);
+            Debug.Log(HP.Tokens);
+            enemyNet.GetPlaceByLabel("#collision.arrow").Tokens = collision.gameObject.GetComponent<Projectile>().damage;
+            Destroy(collision.gameObject);
+            if (enemyNet.GetPlaceByLabel("IsDead").Tokens > 0)
+            {
+                Destroy(gameObject);
+            }
+           
         }
-    }
 
+    }
+     IEnumerator Initialize()
+    {
+        yield return new WaitForSeconds(1);
+        enemyNet.GetPlaceByLabel("#Initialize").Tokens = 1;
+    }
         IEnumerator changeDirection()
     {
         running = true;
