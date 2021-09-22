@@ -114,8 +114,8 @@
         </place>
         <place>
             <id>49</id>
-            <x>-213</x>
-            <y>-163</y>
+            <x>-206</x>
+            <y>-164</y>
             <label>Next Level</label>
             <tokens>0</tokens>
             <isStatic>false</isStatic>
@@ -256,6 +256,30 @@
             <tokens>0</tokens>
             <isStatic>false</isStatic>
         </place>
+        <place>
+            <id>94</id>
+            <x>-802</x>
+            <y>-323</y>
+            <label>Out of HP</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>97</id>
+            <x>-877</x>
+            <y>-325</y>
+            <label>Out of Stamina</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
+        <place>
+            <id>99</id>
+            <x>-835</x>
+            <y>-181</y>
+            <label>#Initialize</label>
+            <tokens>0</tokens>
+            <isStatic>false</isStatic>
+        </place>
         <transition>
             <id>20</id>
             <x>-470</x>
@@ -306,7 +330,7 @@
         </transition>
         <transition>
             <id>48</id>
-            <x>-211</x>
+            <x>-206</x>
             <y>-237</y>
             <label>Portal</label>
         </transition>
@@ -376,6 +400,30 @@
             <y>299</y>
             <label>Shield Timed Out</label>
         </transition>
+        <transition>
+            <id>93</id>
+            <x>-804</x>
+            <y>-238</y>
+            <label/>
+        </transition>
+        <transition>
+            <id>98</id>
+            <x>-872</x>
+            <y>-239</y>
+            <label/>
+        </transition>
+        <arc>
+            <type>regular</type>
+            <sourceId>99</sourceId>
+            <destinationId>93</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>99</sourceId>
+            <destinationId>98</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
         <arc>
             <type>regular</type>
             <sourceId>85</sourceId>
@@ -668,6 +716,34 @@
             <type>regular</type>
             <sourceId>91</sourceId>
             <destinationId>92</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>93</sourceId>
+            <destinationId>94</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>inhibitor</type>
+            <sourceId>26</sourceId>
+            <destinationId>93</destinationId>
+            <multiplicity>1</multiplicity>
+        </arc>
+        <arc>
+            <type>regular</type>
+            <sourceId>98</sourceId>
+            <destinationId>97</destinationId>
+            <multiplicity>1</multiplicity>
+            <breakPoint>
+                <x>-872</x>
+                <y>-297</y>
+            </breakPoint>
+        </arc>
+        <arc>
+            <type>inhibitor</type>
+            <sourceId>43</sourceId>
+            <destinationId>98</destinationId>
             <multiplicity>1</multiplicity>
         </arc>
     </subnet>

@@ -58,6 +58,7 @@ public class EnemyShooter : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
         }
 
+        //atirar e timer
         if (timeBtwShots <= 0 && distanceToPlayer < (stoppingDistance + retreatDistance/2))
         {
             Instantiate(projectile, transform.position, Quaternion.identity);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RdPengine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
     // NÃO ESQUECER DE CRIAR O BENDITO RIGIDBODY2d -b
 
     public GameObject shieldComponent;
+
+    
 
     public int maxHP; // define HP máxima do jogador
     public int maxSP; // define Mana máxima do jogador
@@ -26,6 +29,15 @@ public class Player : MonoBehaviour
     public Place Stamina; // a Stamina do jogador
     public Place Weed; // a quantia de Weed que o jogador coletou
     public Place Shield;
+    public Place OutOfStamina;
+    public Place OutOfHP;
+    private Place initialize;
+    
+    
+    public Place NextLevel;
+    public GameObject portalPrefab;
+    public bool portalCreated = false;
+
 
     // Textos a serem atualizados, itens de UI, provavelmente não deviam estar aqui, mas a fins de praticidade:
     public Text hpText;
@@ -42,6 +54,8 @@ public class Player : MonoBehaviour
     //* Start is called before the first frame update
     void Start()
     {
+        portalCreated = false;
+
         rb2d = GetComponent<Rigidbody2D>(); // carrega o Rigidbody através do objeto em si
         playerNet = new PetriNet("Assets/Networks/player.pflow"); // carrega a PetriNet
 
@@ -52,6 +66,11 @@ public class Player : MonoBehaviour
         Stamina = playerNet.GetPlaceByLabel("Stamina");
         Weed = playerNet.GetPlaceByLabel("Weed");
         Shield = playerNet.GetPlaceByLabel("Shield");
+        NextLevel = playerNet.GetPlaceByLabel("Next Level");
+        OutOfHP = playerNet.GetPlaceByLabel("Out of HP");
+        OutOfStamina = playerNet.GetPlaceByLabel("Out of Stamina");
+        initialize = playerNet.GetPlaceByLabel("#Initialize");
+
 
         // Seta esses valores para o máximo definido nas devidas variáveis
 
@@ -59,9 +78,11 @@ public class Player : MonoBehaviour
         playerNet.GetPlaceByLabel("#AddMana").AddTokens(maxSP);
         playerNet.GetPlaceByLabel("#AddStamina").AddTokens(maxStamina);
         playerNet.GetPlaceByLabel("#ResetWeed").AddTokens(maxWeed);
+    
 
         StartCoroutine(StaminaDecay()); // inicia o decay natural de Stamina do player
         StartCoroutine(ManaRegen()); // inicia a regen natural de Mana do player
+        StartCoroutine(testInitialized());
     }
 
     //* Update is called once per frame
@@ -69,6 +90,7 @@ public class Player : MonoBehaviour
     {
         checkForSurplus();
         updateTexts();
+        
 
         float horizontalImpulse = Input.GetAxis("Horizontal");
         float verticalImpulse = Input.GetAxis("Vertical");
@@ -83,6 +105,11 @@ public class Player : MonoBehaviour
                 StartCoroutine(StartShields());
             }
         }
+
+
+
+
+        GameOver();
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // primariamente colisão com o Inimigo (ou unicamente?)
@@ -117,6 +144,12 @@ public class Player : MonoBehaviour
         {
             collision.gameObject.SetActive(false); // desabilita a weed, para não ser coletada 2 vezes
             playerNet.GetPlaceByLabel("#@WeedPickup").AddTokens(1);
+            StartCoroutine(instantiatePortal());
+        }
+        else if (collision.gameObject.CompareTag("portal"))
+        {
+            Debug.Log("Voce venceu!");
+            SceneManager.LoadScene("Loader");
         }
         // Se a Weed ficar dentro do Player, vai ter mais uma verificação por ela, dentro do Else abaixo
         else
@@ -184,5 +217,33 @@ public class Player : MonoBehaviour
         {
             playerNet.GetPlaceByLabel("#RemoveStamina").AddTokens(Stamina.Tokens - maxStamina);
         }
+    }
+
+    IEnumerator instantiatePortal()
+    {
+        yield return new WaitForSeconds(2);
+        if (NextLevel.Tokens > 0 && !portalCreated)
+        {
+            Instantiate(portalPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+            Debug.Log("portal instanciado!");
+            //Instantiate(portalPrefab, transform.position, transform.rotation);
+        }  
+    }
+
+    void GameOver()
+    {
+        if (OutOfHP.Tokens > 0 || OutOfStamina.Tokens > 0)
+        {
+            Debug.Log("Voce perdeu :(");
+            //Debug.Log("Tokens HP: " + OutOfHP.Tokens);
+            //Debug.Log("Tokens Stamina: " + OutOfStamina.Tokens);
+            SceneManager.LoadScene("Loader");
+        }
+    }
+
+    IEnumerator testInitialized()
+    {
+        yield return new WaitForSeconds(2);
+        initialize.Tokens = 1;
     }
 }

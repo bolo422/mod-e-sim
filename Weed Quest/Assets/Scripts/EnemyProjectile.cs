@@ -24,12 +24,13 @@ public class EnemyProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //movimento até o alvo
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
 
         //GetComponent<Rigidbody2D>().velocity = transform.up * speed;
 
+        //destruição após atingir posição do alvo
         if (transform.position.x == target.x && transform.position.y == target.y)
         {
             Destroy(gameObject);
