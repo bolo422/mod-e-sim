@@ -9,6 +9,7 @@ TagManager:
   - potStamina
   - weed
   - enemy
+  - portal
   layers:
   - Default
   - TransparentFX

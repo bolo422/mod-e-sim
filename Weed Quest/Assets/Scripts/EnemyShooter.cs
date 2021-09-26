@@ -4,48 +4,73 @@ using UnityEngine;
 using RdPengine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class EnemyShooter : MonoBehaviour
 {
     public PetriNet enemyNet;
+
     public float speed;
-    public Vector3 direction = Vector3.up;//(0,0,0)
-    bool running = false;
-    Vector3 destination;
-    Rigidbody2D rb;
+    public float stoppingDistance;
+    public float retreatDistance;
+
+    private Transform player;
 
     public int maxHP; // define HP máxima do jogador
     public Place HP; // a HP do jogador
     public int damage;
-    
-    
+
+    private float timeBtwShots;
+    public float startTimeBtwShots;
+    public GameObject projectile;
 
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Initialize());
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyNet = new PetriNet("Assets/Networks/enemy.pflow");
-        rb = GetComponent<Rigidbody2D>();
-
         HP = enemyNet.GetPlaceByLabel("HP");
-        enemyNet.GetPlaceByLabel("#AddHP").Tokens = maxHP;
-        Debug.Log(enemyNet.GetPlaceByLabel("HP").Tokens);
+        enemyNet.GetPlaceByLabel("#AddHP").AddTokens(maxHP);
 
+        timeBtwShots = startTimeBtwShots;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!running)
+        //float lookAngle = Mathf.Atan2(player.position.y, player.position.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(0f, 0f, lookAngle - 90f);
+
+
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+
+        // Recuar ou Avançar no player
+        if (distanceToPlayer > stoppingDistance)
         {
-            StartCoroutine(changeDirection());
+            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
-        //destination = transform.position + direction;
-        //transform.position += direction * speed;
-        //transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime*2);
-        //rb.AddForce(direction * speed,ForceMode2D.Impulse);
-        rb.velocity += new Vector2(direction.x, direction.y) * Time.deltaTime;
+        else if (distanceToPlayer < stoppingDistance && distanceToPlayer > retreatDistance)
+        {
+            transform.position = this.transform.position;
+        }
+        else if (distanceToPlayer < retreatDistance)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+        }
+
+        //atirar e timer
+        if (timeBtwShots <= 0 && distanceToPlayer < (stoppingDistance + retreatDistance/2))
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            timeBtwShots = startTimeBtwShots;
+        }
+        else
+        {
+            timeBtwShots -= Time.deltaTime;
+        }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {        
@@ -62,7 +87,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) // Tiros
     {
-       
+
         if (collision.gameObject.name == "projectile")
         {
             Debug.Log(HP.Tokens);
@@ -72,21 +97,14 @@ public class Enemy : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-           
-        }
 
+        }
     }
-     IEnumerator Initialize()
+
+    IEnumerator Initialize()
     {
         yield return new WaitForSeconds(1);
         enemyNet.GetPlaceByLabel("#Initialize").Tokens = 1;
     }
-        IEnumerator changeDirection()
-    {
-        running = true;
-        yield return new WaitForSeconds(1);
-        direction.x = Random.Range(-1, 2);
-        direction.y = Random.Range(-1, 2);
-        running = false;
-    }
+
 }
