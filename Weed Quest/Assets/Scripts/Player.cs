@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     // NÃO ESQUECER DE CRIAR O BENDITO RIGIDBODY2d -b
 
     public GameObject shieldComponent;
-    public Camera camera;    
+    public cameraPlayer mainCamera;    
 
     public int maxHP; // define HP máxima do jogador
     public int maxSP; // define Mana máxima do jogador
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
     //* Start is called before the first frame update
     void Start()
     {
+        mainCamera.player = gameObject;
         portalCreated = false;
 
         rb2d = GetComponent<Rigidbody2D>(); // carrega o Rigidbody através do objeto em si

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CaveGenerator : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class CaveGenerator : MonoBehaviour
     float xi = -1.0f;
     float yi = 1.0f;
     public GameObject player, enemy1, enemy2, hp, mp, ammo, weed, portal;
+
+    public Text hpText;
+    public Text spText;
+    public Text staminaText;
+    public Text weedText;
+
+    public cameraPlayer mainCamera;
 
     int[,] map;
     Queue<Zones> zones = new Queue<Zones>();
@@ -219,7 +227,13 @@ public class CaveGenerator : MonoBehaviour
         Vector3 p = tilePrefab.transform.position;
         p.x = mainZone.spots[r].pos.x;
         p.y = mainZone.spots[r].pos.y;
+        tilePrefab.GetComponent<Player>().hpText = hpText;
+        tilePrefab.GetComponent<Player>().spText = spText;
+        tilePrefab.GetComponent<Player>().staminaText = staminaText;
+        tilePrefab.GetComponent<Player>().weedText = weedText;
+        tilePrefab.GetComponent<Player>().mainCamera = mainCamera;
         GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+
 
         r = Random.Range(0, mainZone.spots.Length);
 
