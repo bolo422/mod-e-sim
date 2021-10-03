@@ -29,7 +29,6 @@ public class Enemy : MonoBehaviour
 
         HP = enemyNet.GetPlaceByLabel("HP");
         enemyNet.GetPlaceByLabel("#AddHP").Tokens = maxHP;
-        Debug.Log(enemyNet.GetPlaceByLabel("HP").Tokens);
 
     }
 

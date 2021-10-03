@@ -14,8 +14,7 @@ public class Player : MonoBehaviour
     // NÃO ESQUECER DE CRIAR O BENDITO RIGIDBODY2d -b
 
     public GameObject shieldComponent;
-
-    
+    public Camera camera;    
 
     public int maxHP; // define HP máxima do jogador
     public int maxSP; // define Mana máxima do jogador
