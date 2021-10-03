@@ -9,14 +9,18 @@ public class CaveGenerator : MonoBehaviour
 
     [Range(0, 100)]
     public int randomFillPercent;
-    public string seed;
+    public int seed;
     public bool useRandomSeed;
     [Range(0, 5)]
     public int smooth;
     public GameObject tileset, tilesetFlood, tilesetMain;
     float xi = -1.0f;
     float yi = 1.0f;
-    public GameObject player, enemy1, enemy2, hp, mp, ammo, weed, portal;
+    public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal;
+    public int[] hpQtd;
+    public int[] spQtd;
+    public int[] staminaQtd;
+    public int[] weedQtd;
 
     public Text hpText;
     public Text spText;
@@ -85,10 +89,11 @@ public class CaveGenerator : MonoBehaviour
     {
         if (useRandomSeed)
         {
-            seed = Time.time.ToString();
+            seed = Random.Range(0, 1000);
+            //Debug.Log(seed);
         }
 
-        System.Random number = new System.Random(seed.GetHashCode());
+        System.Random number = new System.Random(seed);
 
         for (int x = 0; x < width; x++)
         {
@@ -221,27 +226,79 @@ public class CaveGenerator : MonoBehaviour
 
     void spawnObjects()
     {
+        //Rands
         int r = Random.Range(0, mainZone.spots.Length);
+        int rWeed = Random.Range(weedQtd[0], weedQtd[1]);
 
+        //Player
         GameObject tilePrefab = player;
-        Vector3 p = tilePrefab.transform.position;
-        p.x = mainZone.spots[r].pos.x;
-        p.y = mainZone.spots[r].pos.y;
-        tilePrefab.GetComponent<Player>().hpText = hpText;
-        tilePrefab.GetComponent<Player>().spText = spText;
-        tilePrefab.GetComponent<Player>().staminaText = staminaText;
-        tilePrefab.GetComponent<Player>().weedText = weedText;
-        tilePrefab.GetComponent<Player>().mainCamera = mainCamera;
-        GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+        Vector3 prefabPosition = tilePrefab.transform.position;
+        prefabPosition.x = mainZone.spots[r].pos.x;
+        prefabPosition.y = mainZone.spots[r].pos.y;
+        tilePrefab.GetComponent<Player>().InstantiateHelp(hpText, spText, staminaText, weedText, mainCamera, rWeed);
+        GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
 
 
-        r = Random.Range(0, mainZone.spots.Length);
+        //Enemy
+        for (int i = 0; i < rWeed * 2.5; i++)
+        {
+            r = Random.Range(0, mainZone.spots.Length);
 
-        tilePrefab = enemy1;
-        p = tilePrefab.transform.position;
-        p.x = mainZone.spots[r].pos.x;
-        p.y = mainZone.spots[r].pos.y;
-        newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+            int r2 = Random.Range(0, 1);
+            if (r2 == 0) { tilePrefab = enemy1; }
+            else { tilePrefab = enemy2; }
+
+            prefabPosition = tilePrefab.transform.position;
+            prefabPosition.x = mainZone.spots[r].pos.x;
+            prefabPosition.y = mainZone.spots[r].pos.y;
+            newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+        }
+
+        //Weed
+        for (int i = 0; i < rWeed; i++)
+        {
+            r = Random.Range(0, mainZone.spots.Length);
+            tilePrefab = weed;
+            prefabPosition = tilePrefab.transform.position;
+            prefabPosition.x = mainZone.spots[r].pos.x;
+            prefabPosition.y = mainZone.spots[r].pos.y;
+            newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+            
+        }
+
+        //HpPot
+        for (int i = 0; i < Random.Range(hpQtd[0], hpQtd[1]); i++)
+        {
+            r = Random.Range(0, mainZone.spots.Length);
+            tilePrefab = hp;
+            prefabPosition = tilePrefab.transform.position;
+            prefabPosition.x = mainZone.spots[r].pos.x;
+            prefabPosition.y = mainZone.spots[r].pos.y;
+            newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+        }
+
+        //SpPot
+        for (int i = 0; i < Random.Range(spQtd[0], spQtd[1]); i++)
+        {
+            r = Random.Range(0, mainZone.spots.Length);
+            tilePrefab = sp;
+            prefabPosition = tilePrefab.transform.position;
+            prefabPosition.x = mainZone.spots[r].pos.x;
+            prefabPosition.y = mainZone.spots[r].pos.y;
+            newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+        }
+
+        //StaminaPot
+        for (int i = 0; i < Random.Range(staminaQtd[0], staminaQtd[1]); i++)
+        {
+            r = Random.Range(0, mainZone.spots.Length);
+            tilePrefab = stamina;
+            prefabPosition = tilePrefab.transform.position;
+            prefabPosition.x = mainZone.spots[r].pos.x;
+            prefabPosition.y = mainZone.spots[r].pos.y;
+            newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+        }
+
     }
 
 }

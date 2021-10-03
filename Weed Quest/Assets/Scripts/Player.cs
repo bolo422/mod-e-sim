@@ -246,4 +246,14 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2);
         initialize.Tokens = 1;
     }
+
+    public void InstantiateHelp(Text _hpText, Text _spText, Text _staminaText, Text _weedText, cameraPlayer _mainCamera, int _maxWeed)
+    {
+        hpText = _hpText;
+        spText = _spText;
+        staminaText = _staminaText;
+        weedText = _weedText;
+        mainCamera = _mainCamera;
+        maxWeed = _maxWeed;
+    }
 }

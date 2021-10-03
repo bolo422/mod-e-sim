@@ -190,13 +190,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aed5d70607cc2d4f97f3ab1849f7e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.05
+  speed: 0.8
   shieldComponent: {fileID: 6086933067564078351}
-  camera: {fileID: 6086933066185082032}
+  mainCamera: {fileID: 0}
   maxHP: 25
   maxSP: 25
   maxStamina: 25
-  maxWeed: 1
+  maxWeed: 6
   portalPrefab: {fileID: 1523311400100793365, guid: 9174781a915f3d043bb6551ecdcd9085,
     type: 3}
   portalCreated: 0
