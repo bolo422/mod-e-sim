@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     public Place NextLevel;
     public GameObject portalPrefab;
     public bool portalCreated = false;
+    public Vector3 portalPos;
 
 
     // Textos a serem atualizados, itens de UI, provavelmente não deviam estar aqui, mas a fins de praticidade:
@@ -224,7 +225,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (NextLevel.Tokens > 0 && !portalCreated)
         {
-            Instantiate(portalPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+            Instantiate(portalPrefab, portalPos, new Quaternion(0, 0, 0, 0));
             Debug.Log("portal instanciado!");
             //Instantiate(portalPrefab, transform.position, transform.rotation);
         }  
@@ -247,7 +248,7 @@ public class Player : MonoBehaviour
         initialize.Tokens = 1;
     }
 
-    public void InstantiateHelp(Text _hpText, Text _spText, Text _staminaText, Text _weedText, cameraPlayer _mainCamera, int _maxWeed)
+    public void InstantiateHelp(Text _hpText, Text _spText, Text _staminaText, Text _weedText, cameraPlayer _mainCamera, int _maxWeed, Vector3 _portalPos)
     {
         hpText = _hpText;
         spText = _spText;
@@ -255,5 +256,6 @@ public class Player : MonoBehaviour
         weedText = _weedText;
         mainCamera = _mainCamera;
         maxWeed = _maxWeed;
+        portalPos = _portalPos;
     }
 }

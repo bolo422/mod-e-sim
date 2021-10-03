@@ -1533,7 +1533,7 @@ MonoBehaviour:
   hpQtd: 020000000a000000
   spQtd: 0200000006000000
   staminaQtd: 0500000008000000
-  weedQtd: 050000000a000000
+  weedQtd: 0100000001000000
   hpText: {fileID: 1622232896}
   spText: {fileID: 1301323871}
   staminaText: {fileID: 549026102}

@@ -229,13 +229,16 @@ public class CaveGenerator : MonoBehaviour
         //Rands
         int r = Random.Range(0, mainZone.spots.Length);
         int rWeed = Random.Range(weedQtd[0], weedQtd[1]);
+        int rPortal = Random.Range(0, mainZone.spots.Length);
 
+        //Portal
+        Vector3 portalPos = new Vector3(mainZone.spots[rPortal].pos.x, mainZone.spots[rPortal].pos.y, 0.0f);
         //Player
         GameObject tilePrefab = player;
         Vector3 prefabPosition = tilePrefab.transform.position;
         prefabPosition.x = mainZone.spots[r].pos.x;
         prefabPosition.y = mainZone.spots[r].pos.y;
-        tilePrefab.GetComponent<Player>().InstantiateHelp(hpText, spText, staminaText, weedText, mainCamera, rWeed);
+        tilePrefab.GetComponent<Player>().InstantiateHelp(hpText, spText, staminaText, weedText, mainCamera, rWeed, portalPos);
         GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
 
 
