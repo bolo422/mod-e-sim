@@ -34,10 +34,18 @@ public class WallSetup : MonoBehaviour
     IEnumerator setupCoroutine()
     {
         yield return new WaitForSeconds(0.1f);
-        if (cX > 1 && cX < maxX - 2 && cY > 0 && cY < maxY - 2)
+        if (cX > 2 && cX < maxX - 3 && cY > 2 && cY < maxY - 3)
         {
+            // Arbustos 1x1
+            if(caveManager.map[cX - 1, cY] == 2 && caveManager.map[cX + 1, cY] == 2 && caveManager.map[cX, cY + 1] == 2 ||
+                caveManager.map[cX - 1, cY] == 2 && caveManager.map[cX + 1, cY] == 2 && caveManager.map[cX, cY - 1] == 2 ||
+                caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX + 1, cY] == 2 ||
+                caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX - 1, cY] == 2)
+            {
+                sprite.sprite = forestSprite.forestSprites[22];
+            }
             // Cima/Baixo
-            if (caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX - 1, cY] == 1 && caveManager.map[cX + 1, cY] == 1)
+            else if (caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX - 1, cY] == 1 && caveManager.map[cX + 1, cY] == 1)
             {
                 sprite.sprite = forestSprite.forestSprites[15];
             }

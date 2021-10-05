@@ -33,11 +33,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Enemy enemy = collider.GetComponent<Enemy>();
-        //if (enemy != null)
-        //{
-        // Script de causar dano no Inimigo
-        // Destroy(gameObject);
-        //}            
+        if(collision.CompareTag("wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

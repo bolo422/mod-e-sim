@@ -26,11 +26,27 @@ public class PlayerShootComponent : MonoBehaviour
         lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, lookAngle - 90f);
 
-        if(Input.GetMouseButtonDown(0) && player.GetComponent<Player>().playerNet.GetPlaceByLabel("Mana").Tokens >= 5)
+        updatePlayerDirection();
+
+        if (Input.GetMouseButtonDown(0) && player.GetComponent<Player>().playerNet.GetPlaceByLabel("Mana").Tokens >= 5)
         {
             player.GetComponent<Player>().playerNet.GetPlaceByLabel("#ProjectileFired").AddTokens(5);
             FireProjectile();
         }        
+    }
+
+    void updatePlayerDirection()
+    {
+        player.gameObject.transform.rotation = Quaternion.identity;
+
+        if(lookAngle > -60 && lookAngle < 60 && player.GetComponent<SpriteRenderer>().flipX == false)
+        {
+            player.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if(lookAngle > 120 && player.GetComponent<SpriteRenderer>().flipX == true || lookAngle < -120 && player.GetComponent<SpriteRenderer>().flipX == true)
+        {
+            player.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 
     void FireProjectile()

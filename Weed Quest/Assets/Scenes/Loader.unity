@@ -251,6 +251,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 58488975615c5ab47ae42a3d3e6163bb, type: 3}
   - {fileID: 21300000, guid: 2cb5ba4f41168ae449454d7c90b7bbb0, type: 3}
   - {fileID: 21300000, guid: 836e8a6be77c9d3488d1c0899b6d42c3, type: 3}
+  - {fileID: 21300000, guid: 0cac10597cf0e1e49af38f2b6f8d0941, type: 3}
 --- !u!4 &205596892
 Transform:
   m_ObjectHideFlags: 0
@@ -2095,7 +2096,7 @@ MonoBehaviour:
   randomFillPercent: 51
   seed: 0
   useRandomSeed: 1
-  smooth: 4
+  smooth: 5
   tileset: {fileID: 526412259614827206, guid: aa9da5c8f4bac5544bf3586793b5a239, type: 3}
   tilesetFlood: {fileID: 526412259614827206, guid: da29111fcc6f5a64aa0bda2b9cb6c0c5,
     type: 3}
