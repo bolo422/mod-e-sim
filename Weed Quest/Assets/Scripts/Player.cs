@@ -45,6 +45,10 @@ public class Player : MonoBehaviour
     public Text staminaText;
     public Text weedText;
 
+    public Slider hpSlider;
+    public Slider spSlider;
+    public Slider staminaSlider;
+
     // A definir:
 
     // Se o jogo usar um Manager, a quantia de Weeds coletadas não pode ficar aqui, em cujo caso teria
@@ -72,14 +76,20 @@ public class Player : MonoBehaviour
         OutOfStamina = playerNet.GetPlaceByLabel("Out of Stamina");
         initialize = playerNet.GetPlaceByLabel("#Initialize");
 
-
         // Seta esses valores para o máximo definido nas devidas variáveis
 
         playerNet.GetPlaceByLabel("#AddHP").AddTokens(maxHP);
         playerNet.GetPlaceByLabel("#AddMana").AddTokens(maxSP);
         playerNet.GetPlaceByLabel("#AddStamina").AddTokens(maxStamina);
         playerNet.GetPlaceByLabel("#ResetWeed").AddTokens(maxWeed);
-    
+
+        hpSlider.GetComponent<Slider>().maxValue = maxHP;
+        spSlider.GetComponent<Slider>().maxValue = maxSP;
+        staminaSlider.GetComponent<Slider>().maxValue = maxStamina;
+
+        hpSlider.GetComponent<Slider>().value = HP.Tokens;
+        spSlider.GetComponent<Slider>().value = SP.Tokens;
+        staminaSlider.GetComponent<Slider>().value = Stamina.Tokens;
 
         StartCoroutine(StaminaDecay()); // inicia o decay natural de Stamina do player
         StartCoroutine(ManaRegen()); // inicia a regen natural de Mana do player
@@ -89,7 +99,7 @@ public class Player : MonoBehaviour
     //* Update is called once per frame
     void Update()
     {
-        checkForSurplus();
+        updateBars();
         updateTexts();
         
 
@@ -129,7 +139,6 @@ public class Player : MonoBehaviour
         {
             collision.gameObject.SetActive(false); // desabilita a poção, para não ser coletada 2 vezes
             playerNet.GetPlaceByLabel("#@HPPot").AddTokens(10);
-
         }
         else if (collision.gameObject.CompareTag("potSP"))
         {
@@ -188,7 +197,9 @@ public class Player : MonoBehaviour
     {
         playerNet.GetPlaceByLabel("#ActivateShield").Tokens = 1;
         shieldComponent.SetActive(true);
-        playerNet.GetPlaceByLabel("#RemoveMana").Tokens = 10;
+        playerNet.GetPlaceByLabel("#RemoveMana").Tokens = 10; 
+        
+        updateBars();
 
         yield return new WaitForSeconds(5);
 
@@ -198,9 +209,6 @@ public class Player : MonoBehaviour
 
     void updateTexts()
     {
-        hpText.text = "HP: " + HP.Tokens.ToString() + "/" + maxHP.ToString();
-        spText.text = "SP: " + SP.Tokens.ToString() + "/" + maxSP.ToString();
-        staminaText.text = "Stamina: " + Stamina.Tokens.ToString() + "/" + maxStamina.ToString();
         weedText.text = "Weed: " + Weed.Tokens.ToString() + "/" + maxWeed.ToString();
     }
 
@@ -248,14 +256,21 @@ public class Player : MonoBehaviour
         initialize.Tokens = 1;
     }
 
-    public void InstantiateHelp(Text _hpText, Text _spText, Text _staminaText, Text _weedText, cameraPlayer _mainCamera, int _maxWeed, Vector3 _portalPos)
+    public void InstantiateHelp(Slider _hpSlider, Slider _spSlider, Slider _staminaSlider, Text _weedText, cameraPlayer _mainCamera, int _maxWeed, Vector3 _portalPos)
     {
-        hpText = _hpText;
-        spText = _spText;
-        staminaText = _staminaText;
+        hpSlider = _hpSlider;
+        spSlider = _spSlider;
+        staminaSlider = _staminaSlider;
         weedText = _weedText;
         mainCamera = _mainCamera;
         maxWeed = _maxWeed;
         portalPos = _portalPos;
+    }
+
+    void updateBars()
+    {
+        hpSlider.GetComponent<Slider>().value = HP.Tokens;
+        spSlider.GetComponent<Slider>().value = SP.Tokens;
+        staminaSlider.GetComponent<Slider>().value = Stamina.Tokens;
     }
 }

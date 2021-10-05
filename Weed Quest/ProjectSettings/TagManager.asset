@@ -10,6 +10,8 @@ TagManager:
   - weed
   - enemy
   - portal
+  - wall
+  - floor
   layers:
   - Default
   - TransparentFX

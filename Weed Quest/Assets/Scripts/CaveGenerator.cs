@@ -27,9 +27,13 @@ public class CaveGenerator : MonoBehaviour
     public Text staminaText;
     public Text weedText;
 
+    public Slider hpSlider;
+    public Slider spSlider;
+    public Slider staminaSlider;
+
     public cameraPlayer mainCamera;
 
-    int[,] map;
+    public int[,] map;
     Queue<Zones> zones = new Queue<Zones>();
     Queue<Zones> backup = new Queue<Zones>();
     Zones mainZone = new Zones();
@@ -182,6 +186,8 @@ public class CaveGenerator : MonoBehaviour
                         p.x = x;
                         p.y = y;
                         GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+                        newTile.GetComponent<WallSetup>().setCaveParent(gameObject);
+                        newTile.GetComponent<WallSetup>().setCoord(x, y);
                     }
                     if (map[x, y] == 2)
                     {
@@ -238,7 +244,7 @@ public class CaveGenerator : MonoBehaviour
         Vector3 prefabPosition = tilePrefab.transform.position;
         prefabPosition.x = mainZone.spots[r].pos.x;
         prefabPosition.y = mainZone.spots[r].pos.y;
-        tilePrefab.GetComponent<Player>().InstantiateHelp(hpText, spText, staminaText, weedText, mainCamera, rWeed, portalPos);
+        tilePrefab.GetComponent<Player>().InstantiateHelp(hpSlider, spSlider, staminaSlider, weedText, mainCamera, rWeed, portalPos);
         GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
 
 

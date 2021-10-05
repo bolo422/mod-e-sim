@@ -51,7 +51,7 @@ MonoBehaviour:
   spawnPosition: {fileID: 6086933066195575923}
   projectile: {fileID: 8949386180136201168, guid: b8e1480f6c7643d458ac1533ae270cb0,
     type: 3}
-  bulletSpeed: 10
+  bulletSpeed: 20
   player: {fileID: 6086933066195575927}
 --- !u!1 &6086933066185082035
 GameObject:
@@ -165,7 +165,7 @@ RectTransform:
   m_GameObject: {fileID: 6086933066195575927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 6086933066045488147}
   - {fileID: 6086933067564078350}
@@ -190,20 +190,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aed5d70607cc2d4f97f3ab1849f7e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
+  speed: 0.4
   shieldComponent: {fileID: 6086933067564078351}
   mainCamera: {fileID: 0}
   maxHP: 25
-  maxSP: 25
+  maxSP: 190
   maxStamina: 25
-  maxWeed: 6
+  maxWeed: 1
   portalPrefab: {fileID: 1523311400100793365, guid: 9174781a915f3d043bb6551ecdcd9085,
     type: 3}
   portalCreated: 0
+  portalPos: {x: 127, y: 85, z: 0}
   hpText: {fileID: 0}
   spText: {fileID: 0}
   staminaText: {fileID: 0}
   weedText: {fileID: 0}
+  hpSlider: {fileID: 0}
+  spSlider: {fileID: 0}
+  staminaSlider: {fileID: 0}
 --- !u!50 &6086933066195575922
 Rigidbody2D:
   serializedVersion: 4
@@ -266,7 +270,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -6627890139303113470, guid: 0cec50083299f084398dda83c29b7e38,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -290,18 +295,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.022536352, y: -0.1722458}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.3030294, y: 0.32556152}
   m_EdgeRadius: 0
 --- !u!1 &6086933067564078351
 GameObject:
