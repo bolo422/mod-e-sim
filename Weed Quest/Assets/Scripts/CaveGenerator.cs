@@ -104,7 +104,7 @@ public class CaveGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+                if (x <= 2 || x >= width - 3 || y <= 2 || y >= height - 3)
                     map[x, y] = 1;
                 else
                     map[x, y] = (number.Next(0, 100) < randomFillPercent) ? 1 : 0;
