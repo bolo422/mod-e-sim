@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CaveGenerator : MonoBehaviour
 {
     public int width, height;
-
+    
     [Range(0, 100)]
     public int randomFillPercent;
     public int seed;
@@ -41,6 +41,7 @@ public class CaveGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        randomFillPercent += LevelSettings.level * 2;
         generateCave();
         setMainZone();
         spawnObjects();
@@ -232,8 +233,9 @@ public class CaveGenerator : MonoBehaviour
 
     void spawnObjects()
     {
+        Debug.Log("Main: " + mainZone.size);
         //Rands
-        int r = Random.Range(0, mainZone.spots.Length);
+        int r = Random.Range(0, mainZone.spots.Length);                                             
         int rWeed = Random.Range(weedQtd[0], weedQtd[1]);
         int rPortal = Random.Range(0, mainZone.spots.Length);
 
@@ -309,6 +311,7 @@ public class CaveGenerator : MonoBehaviour
         }
 
     }
+
 
 }
 

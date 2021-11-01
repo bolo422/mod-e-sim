@@ -159,6 +159,7 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.CompareTag("portal"))
         {
             Debug.Log("Voce venceu!");
+            LevelSettings.level += 1;
             SceneManager.LoadScene("Loader");
         }
         // Se a Weed ficar dentro do Player, vai ter mais uma verificação por ela, dentro do Else abaixo
