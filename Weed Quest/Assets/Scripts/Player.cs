@@ -30,8 +30,7 @@ public class Player : MonoBehaviour
     public Place Shield;
     public Place OutOfStamina;
     public Place OutOfHP;
-    private Place initialize;
-    
+    private Place initialize;    
     
     public Place NextLevel;
     public GameObject portalPrefab;
@@ -101,7 +100,6 @@ public class Player : MonoBehaviour
     {
         updateBars();
         updateTexts();
-        
 
         float horizontalImpulse = Input.GetAxis("Horizontal");
         float verticalImpulse = Input.GetAxis("Vertical");
@@ -232,7 +230,7 @@ public class Player : MonoBehaviour
     IEnumerator instantiatePortal()
     {
         yield return new WaitForSeconds(2);
-        if (NextLevel.Tokens > 0 && !portalCreated)
+        if (maxWeed - Weed.Tokens == 0 && !portalCreated)
         {
             Instantiate(portalPrefab, portalPos, new Quaternion(0, 0, 0, 0));
             Debug.Log("portal instanciado!");
