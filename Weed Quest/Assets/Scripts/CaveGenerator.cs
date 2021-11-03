@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class CaveGenerator : MonoBehaviour
 {
@@ -45,14 +46,7 @@ public class CaveGenerator : MonoBehaviour
         setMainZone();
         spawnObjects();
 
-        //for (int i = 0; i < mainZone.spots.Length; i++)
-        //{
-        //    GameObject tilePrefab = tilesetMain;
-        //    Vector3 p = tilePrefab.transform.position;
-        //    p.x = mainZone.spots[i].pos.x;
-        //    p.y = mainZone.spots[i].pos.y;
-        //    GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
-        //}
+
     }
 
     // Update is called once per frame
@@ -63,6 +57,26 @@ public class CaveGenerator : MonoBehaviour
             generateCave();
         }
     }
+
+    void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+
+        Positions[] testarray = mainZone.Allpositions.ToArray();
+        for (int i = 0; i < testarray.Length; i++)
+        {
+            string label;
+            if(testarray[i].travelCost >= 85 && testarray[i].travelCost <= 94){ label = "m"; }
+            else if(testarray[i].travelCost >= 95){ label = "D"; }
+            else{ label = " "; }
+
+            Handles.Label(
+            new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
+            label);
+        }
+#endif
+    }
+
 
     void generateCave()
     {
@@ -222,7 +236,6 @@ public class CaveGenerator : MonoBehaviour
             {
                 mainZone = backup.Peek();
                 mainZone.setSpots();
-                mainZone.setAllGroundValues(0);
                 break;
             }
             
@@ -234,8 +247,6 @@ public class CaveGenerator : MonoBehaviour
     void spawnObjects()
     {
         setupObjectsQnt();
-
-        Debug.Log("Main: " + mainZone.Allpositions.Peek().groundValue);
 
         int random = Random.Range(0, mainZone.spots.Length);
         int rPortal = Random.Range(0, mainZone.spots.Length);
@@ -348,7 +359,8 @@ public class Positions
     public Queue<Positions> neighborns = new Queue<Positions>();
     public int counter;
     public bool hasNeighborns;
-    public int groundValue = -1;
+    public int travelCost = Random.Range(1, 101);
+
 
     public void setPos(Vector2Int position)
     {
@@ -451,11 +463,7 @@ public class Zones
     {
         spots = Allpositions.ToArray();
     }
-    public void setAllGroundValues(int value)
-    {
-        for(int i = 0; i < spots.Length; i++)
-        {
-            spots[i].groundValue = value;
-        }
-    }
+
 }
+
+

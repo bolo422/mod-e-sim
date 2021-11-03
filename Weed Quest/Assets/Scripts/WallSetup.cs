@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WallSetup : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class WallSetup : MonoBehaviour
     CaveGenerator caveManager;
     SpriteHolder forestSprite;
     SpriteRenderer sprite;
+    
 
     [SerializeField]
     int maxX, maxY;
