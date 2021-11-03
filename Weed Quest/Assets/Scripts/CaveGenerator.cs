@@ -222,6 +222,7 @@ public class CaveGenerator : MonoBehaviour
             {
                 mainZone = backup.Peek();
                 mainZone.setSpots();
+                mainZone.setAllGroundValues(0);
                 break;
             }
             
@@ -234,7 +235,7 @@ public class CaveGenerator : MonoBehaviour
     {
         setupObjectsQnt();
 
-        Debug.Log("Main: " + mainZone.spots.Length);
+        Debug.Log("Main: " + mainZone.Allpositions.Peek().groundValue);
 
         int random = Random.Range(0, mainZone.spots.Length);
         int rPortal = Random.Range(0, mainZone.spots.Length);
@@ -347,6 +348,7 @@ public class Positions
     public Queue<Positions> neighborns = new Queue<Positions>();
     public int counter;
     public bool hasNeighborns;
+    public int groundValue = -1;
 
     public void setPos(Vector2Int position)
     {
@@ -449,5 +451,11 @@ public class Zones
     {
         spots = Allpositions.ToArray();
     }
-
+    public void setAllGroundValues(int value)
+    {
+        for(int i = 0; i < spots.Length; i++)
+        {
+            spots[i].groundValue = value;
+        }
+    }
 }
