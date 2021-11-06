@@ -252,6 +252,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2cb5ba4f41168ae449454d7c90b7bbb0, type: 3}
   - {fileID: 21300000, guid: 836e8a6be77c9d3488d1c0899b6d42c3, type: 3}
   - {fileID: 21300000, guid: 0cac10597cf0e1e49af38f2b6f8d0941, type: 3}
+  - {fileID: 21300000, guid: be5f26b50773df9428570d087583df3b, type: 3}
 --- !u!4 &205596892
 Transform:
   m_ObjectHideFlags: 0
@@ -582,8 +583,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
-    type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -591,7 +591,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &522049182
@@ -905,8 +905,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
-    type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -914,7 +913,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &774513733
@@ -1038,8 +1037,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
-    type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1047,7 +1045,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &797032219
@@ -1911,8 +1909,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6,
-    type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1920,7 +1917,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1694464159
@@ -2098,10 +2095,9 @@ MonoBehaviour:
   useRandomSeed: 1
   smooth: 5
   tileset: {fileID: 526412259614827206, guid: aa9da5c8f4bac5544bf3586793b5a239, type: 3}
-  tilesetFlood: {fileID: 526412259614827206, guid: da29111fcc6f5a64aa0bda2b9cb6c0c5,
-    type: 3}
-  tilesetMain: {fileID: 526412259614827206, guid: 2105be3772dd0f24b8e2c520a4a32f99,
-    type: 3}
+  tilesetFlood: {fileID: 526412259614827206, guid: da29111fcc6f5a64aa0bda2b9cb6c0c5, type: 3}
+  tilesetMain: {fileID: 526412259614827206, guid: 2105be3772dd0f24b8e2c520a4a32f99, type: 3}
+  tileGround1: {fileID: 526412259614827206, guid: 09502285082a1f64d9cd5ad7f3553992, type: 3}
   player: {fileID: 6086933066195575927, guid: e901f86730e53e74e915efff6443dee2, type: 3}
   enemy1: {fileID: 9213847647495438333, guid: b278ad6f963a30b478bdbb1185934a99, type: 3}
   enemy2: {fileID: 8449547970972234864, guid: 41e9a15b0c1c9f64696e367fe4c33b13, type: 3}
@@ -2110,10 +2106,6 @@ MonoBehaviour:
   stamina: {fileID: 7487512781577295660, guid: ecb79262c21b62d4fb7959805d266a79, type: 3}
   weed: {fileID: 487023644440621057, guid: 4e94a3c827741b541860625773e538d3, type: 3}
   portal: {fileID: 1523311400100793365, guid: 9174781a915f3d043bb6551ecdcd9085, type: 3}
-  hpQtd: 020000000a000000
-  spQtd: 0200000006000000
-  staminaQtd: 0500000008000000
-  weedQtd: 0100000001000000
   hpText: {fileID: 0}
   spText: {fileID: 0}
   staminaText: {fileID: 0}

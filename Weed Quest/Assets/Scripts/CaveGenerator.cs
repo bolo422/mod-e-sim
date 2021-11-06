@@ -14,13 +14,14 @@ public class CaveGenerator : MonoBehaviour
     public bool useRandomSeed;
     [Range(0, 5)]
     public int smooth;
-    public GameObject tileset, tilesetFlood, tilesetMain;
+    public GameObject tileset, tilesetFlood, tilesetMain, tileGround1;
     float xi = -1.0f;
     float yi = 1.0f;
     public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal;
     int WeedQnt;
     int enemiesQnt;
     int potionsQnt;
+    int spotsQnt, spotsSmooth;
 
     public Text hpText;
     public Text spText;
@@ -33,17 +34,31 @@ public class CaveGenerator : MonoBehaviour
 
     public cameraPlayer mainCamera;
 
-    public int[,] map;
+    public int[,] map, mapSpots;
     Queue<Zones> zones = new Queue<Zones>();
     Queue<Zones> backup = new Queue<Zones>();
-    Zones mainZone = new Zones();
+    public Zones mainZone = new Zones();
 
     // Start is called before the first frame update
     void Start()
     {
         randomFillPercent += LevelSettings.level * 2;
+        setupObjectsQnt();
         generateCave();
+        generateSpotCave();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (map[x, y] == 0)
+                {
+                    FloodFillZone(x, y);
+                }
+            }
+        }
         setMainZone();
+        setTravelCost(3);
+        drawCave();
         spawnObjects();
 
 
@@ -81,29 +96,26 @@ public class CaveGenerator : MonoBehaviour
     void generateCave()
     {
         map = new int[width, height];
-        RandomFillMap();
+        RandomFillMap(100, map, randomFillPercent);
 
         for (int i = 0; i < smooth; i++)
         {
-            SmoothMap();
+            SmoothMap(map);
         }
 
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                if (map[x, y] == 0)
-                {
-                    FloodFillZone(x, y);
-                }
-            }
-        }
-
-        drawCave();
+        
 
     }
 
-    void RandomFillMap()
+    void generateSpotCave()
+    {
+        mapSpots = new int[width, height];
+        RandomFillMap(100, mapSpots, randomFillPercent);
+        SmoothMap(mapSpots);
+        convertMaps();
+    }
+
+    void RandomFillMap(int max, int[,] mapRef, int fillPercent)
     {
         if (useRandomSeed)
         {
@@ -118,24 +130,24 @@ public class CaveGenerator : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 if (x <= 2 || x >= width - 3 || y <= 2 || y >= height - 3)
-                    map[x, y] = 1;
+                    mapRef[x, y] = 1;
                 else
-                    map[x, y] = (number.Next(0, 100) < randomFillPercent) ? 1 : 0;
+                    mapRef[x, y] = (number.Next(0, max) < fillPercent) ? 1 : 0;
             }
         }
     }
 
-    void SmoothMap()
+    void SmoothMap(int[,] mapRef)
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                int neighbourWallTiles = getNeightbourWallsCount(x, y);
+                int neighbourWallTiles = getNeightbourWallsCount(x, y, mapRef);
                 if (neighbourWallTiles > 4)
-                    map[x, y] = 1;
+                    mapRef[x, y] = 1;
                 else if (neighbourWallTiles < 4)
-                    map[x, y] = 0;
+                    mapRef[x, y] = 0;
             }
         }
     }
@@ -162,7 +174,7 @@ public class CaveGenerator : MonoBehaviour
         zones.Enqueue(zone);
     }
 
-    int getNeightbourWallsCount(int x, int y)
+    int getNeightbourWallsCount(int x, int y, int[,] mapRef)
     {
         int wallCount = 0;
         for (int neightbourX = x - 1; neightbourX <= x + 1; neightbourX++)
@@ -172,7 +184,7 @@ public class CaveGenerator : MonoBehaviour
                 {
                     if (neightbourX != x || neightbourY != y)
                     {
-                        wallCount += map[neightbourX, neightbourY];
+                        wallCount += mapRef[neightbourX, neightbourY];
                     }
                 }
                 else
@@ -185,6 +197,21 @@ public class CaveGenerator : MonoBehaviour
         return wallCount;
     }
 
+    void convertMaps()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (mapSpots[x, y] == 1 && map[x, y] == 0)
+                {
+                    map[x, y] = 3;
+                }
+
+            }
+        }
+
+    }
     void drawCave()
     {
         if (map != null)
@@ -206,6 +233,14 @@ public class CaveGenerator : MonoBehaviour
                     if (map[x, y] == 2)
                     {
                         GameObject tilePrefab = tilesetFlood;
+                        Vector3 p = tilePrefab.transform.position;
+                        p.x = x;
+                        p.y = y;
+                        GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+                    }
+                    if (map[x, y] == 3)
+                    {
+                        GameObject tilePrefab = tileGround1;
                         Vector3 p = tilePrefab.transform.position;
                         p.x = x;
                         p.y = y;
@@ -245,8 +280,7 @@ public class CaveGenerator : MonoBehaviour
     }
 
     void spawnObjects()
-    {
-        setupObjectsQnt();
+    {       
 
         int random = Random.Range(0, mainZone.spots.Length);
         int rPortal = Random.Range(0, mainZone.spots.Length);
@@ -331,24 +365,36 @@ public class CaveGenerator : MonoBehaviour
             potionsQnt = 5;
             enemiesQnt = 6;
             WeedQnt = 10;
+            spotsQnt = 10;
         }
-        else if (LevelSettings.level <= 6)
+        else if (LevelSettings.level <= 6 && LevelSettings.level > 3)
         {
             potionsQnt = 2;
             enemiesQnt = 3;
             WeedQnt = 5;
+            spotsQnt = -1;
         }
         else
         {
             potionsQnt = 1;
             enemiesQnt = 2;
             WeedQnt = 2;
+            spotsQnt = -1;
         }
-
-
 
     }
 
+    void setTravelCost(int cost)
+    {
+        for (int i = 0; i < mainZone.spots.Length; i++)
+        {
+            if (mapSpots[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] == 1 && map[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] == 0)
+            {
+                map[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] = cost;
+                mainZone.spots[i].travelCost = cost;
+            }
+        }
+    }
 
 }
 
@@ -463,6 +509,7 @@ public class Zones
     {
         spots = Allpositions.ToArray();
     }
+
 
 }
 

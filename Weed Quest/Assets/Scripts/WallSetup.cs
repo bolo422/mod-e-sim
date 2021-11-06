@@ -10,7 +10,7 @@ public class WallSetup : MonoBehaviour
     SpriteHolder forestSprite;
     SpriteRenderer sprite;
     
-
+    
     [SerializeField]
     int maxX, maxY;
 
@@ -20,6 +20,7 @@ public class WallSetup : MonoBehaviour
         sprite = gameObject.GetComponent<SpriteRenderer>();
         forestSprite = GameObject.Find("ForestSpriteHolder").GetComponent<SpriteHolder>();
         StartCoroutine(setupCoroutine());
+
     }
 
     public void setCaveParent(GameObject cave)
@@ -166,4 +167,5 @@ public class WallSetup : MonoBehaviour
             //}
         }
     }
+
 }
