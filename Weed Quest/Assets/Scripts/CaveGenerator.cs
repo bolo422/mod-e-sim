@@ -44,19 +44,9 @@ public class CaveGenerator : MonoBehaviour
     {
         randomFillPercent += LevelSettings.level * 2;
         setupObjectsQnt();
-        generateCave();
-        generateSpotCave();
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                if (map[x, y] == 0)
-                {
-                    FloodFillZone(x, y);
-                }
-            }
-        }
+        generateCave();             
         setMainZone();
+        generateSpotCave();
         setTravelCost(3);
         drawCave();
         spawnObjects();
@@ -66,6 +56,8 @@ public class CaveGenerator : MonoBehaviour
             if(mainZone.spots[i].travelCost != 0)
                 Debug.Log(mainZone.spots[i].travelCost + "\n");
         }
+
+
     }
 
     // Update is called once per frame
@@ -111,7 +103,16 @@ public class CaveGenerator : MonoBehaviour
             SmoothMap(map);
         }
 
-        
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (map[x, y] == 0)
+                {
+                    FloodFillZone(x, y);
+                }
+            }
+        }
 
     }
 
@@ -211,7 +212,7 @@ public class CaveGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (mapSpots[x, y] == 1 && map[x, y] == 0)
+                if (mapSpots[x, y] == 1 && map[x, y] == 2)
                 {
                     map[x, y] = 3;
                 }
@@ -284,6 +285,8 @@ public class CaveGenerator : MonoBehaviour
             
             backup.Dequeue();
         }
+
+        Debug.Log(" 1: " + mainZone.spots.Length);
 
     }
 
@@ -396,9 +399,8 @@ public class CaveGenerator : MonoBehaviour
     {
         for (int i = 0; i < mainZone.spots.Length; i++)
         {
-            if (mapSpots[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] == 1 && map[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] == 0)
+            if (map[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] == cost)
             {
-                map[mainZone.spots[i].pos.x, mainZone.spots[i].pos.y] = cost;
                 mainZone.spots[i].travelCost = cost;
             }
         }
@@ -413,7 +415,7 @@ public class Positions
     public Queue<Positions> neighborns = new Queue<Positions>();
     public int counter;
     public bool hasNeighborns;
-    public int travelCost;// = -1;//Random.Range(1, 101);
+    public int travelCost = 1;
 
 
     public void setPos(Vector2Int position)
