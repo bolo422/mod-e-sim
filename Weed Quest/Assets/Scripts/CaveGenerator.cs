@@ -61,7 +61,11 @@ public class CaveGenerator : MonoBehaviour
         drawCave();
         spawnObjects();
 
-
+        for (int i = 0; i < mainZone.spots.Length; i++)
+        {
+            if(mainZone.spots[i].travelCost != 0)
+                Debug.Log(mainZone.spots[i].travelCost + "\n");
+        }
     }
 
     // Update is called once per frame
@@ -80,14 +84,18 @@ public class CaveGenerator : MonoBehaviour
         Positions[] testarray = mainZone.Allpositions.ToArray();
         for (int i = 0; i < testarray.Length; i++)
         {
-            string label;
-            if(testarray[i].travelCost >= 85 && testarray[i].travelCost <= 94){ label = "m"; }
-            else if(testarray[i].travelCost >= 95){ label = "D"; }
-            else{ label = " "; }
-
             Handles.Label(
             new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
-            label);
+            testarray[i].travelCost.ToString());
+
+            //string label;
+            //if(testarray[i].travelCost >= 85 && testarray[i].travelCost <= 94){ label = "m"; }
+            //else if(testarray[i].travelCost >= 95){ label = "D"; }
+            //else{ label = " "; }
+
+            //Handles.Label(
+            //new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
+            //label);
         }
 #endif
     }
@@ -405,7 +413,7 @@ public class Positions
     public Queue<Positions> neighborns = new Queue<Positions>();
     public int counter;
     public bool hasNeighborns;
-    public int travelCost = Random.Range(1, 101);
+    public int travelCost;// = -1;//Random.Range(1, 101);
 
 
     public void setPos(Vector2Int position)
