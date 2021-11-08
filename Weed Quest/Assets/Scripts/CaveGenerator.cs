@@ -17,15 +17,16 @@ public class CaveGenerator : MonoBehaviour
     public GameObject tileset, tilesetFlood, tilesetMain, tileGround1;
     float xi = -1.0f;
     float yi = 1.0f;
-    public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal;
+    public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal, sparks;
     int WeedQnt;
     int enemiesQnt;
     int potionsQnt;
     int spotsQnt, spotsSmooth;
+    Vector3 portalPos;
 
     Player playerRef;
     Positions[] path;
-    Dijkstra dijkstra;
+    public Dijkstra dijkstra;
 
     public Text hpText;
     public Text spText;
@@ -64,7 +65,7 @@ public class CaveGenerator : MonoBehaviour
 
         for (int i = 0; i < path.Length; i++)
         {
-            Debug.Log(path[i].travelCost + "/n");
+            Debug.Log(path[i].travelCost);
         }
 
     }
@@ -75,6 +76,29 @@ public class CaveGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             generateCave();
+        }
+
+        if (Input.GetKey(KeyCode.K))
+        {
+            path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y),
+                //new Vector2(50, 25));
+                new Vector2(portalPos.x, portalPos.y));
+
+            if (path.Length > 0)
+            {
+                Debug.Log("Caminho encontrado!");
+                for (int i = 0; i < path.Length; i++)
+                {
+                    GameObject tilePrefab = sparks;
+                    Vector3 prefabPosition = new Vector3(path[i].pos.x, path[i].pos.y, 0);
+                    GameObject instant = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+                }
+            }
+            else
+            {
+                Debug.Log("Caminho não encontrado!");
+            }
+
         }
     }
 
@@ -88,17 +112,32 @@ public class CaveGenerator : MonoBehaviour
         //    {
         //        Handles.Label(
         //        new Vector3(path[i].pos.x, path[i].pos.y, 100),
-        //        path[i].travelCost.ToString());
+        //        path[i].totalTravelCost.ToString());
         //    }
         //}
 
         
         Positions[] testarray = mainZone.Allpositions.ToArray();
+
         for (int i = 0; i < testarray.Length; i++)
         {
             Handles.Label(
             new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
-            testarray[i].travelCost.ToString());
+            testarray[i].totalTravelCost.ToString());
+         }
+
+
+
+            //if(testarray[i].visited)
+            //{
+            //    Handles.Label(
+            //    new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
+            //    testarray[i].nIterator.ToString());
+            //}
+        
+
+
+
 
             //string label;
             //if(testarray[i].travelCost >= 85 && testarray[i].travelCost <= 94){ label = "m"; }
@@ -108,7 +147,7 @@ public class CaveGenerator : MonoBehaviour
             //Handles.Label(
             //new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
             //label);
-        }
+            
         
 #endif
     }
@@ -276,6 +315,14 @@ public class CaveGenerator : MonoBehaviour
                         p.y = y;
                         GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
                     }
+                    if (map[x, y] == 4)
+                    {
+                        GameObject tilePrefab = tileGround1;
+                        Vector3 p = tilePrefab.transform.position;
+                        p.x = x;
+                        p.y = y;
+                        GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+                    }
                 }
             }
         }
@@ -318,7 +365,7 @@ public class CaveGenerator : MonoBehaviour
         int rPortal = Random.Range(0, mainZone.spots.Length);
 
         //Portal
-        Vector3 portalPos = new Vector3(mainZone.spots[rPortal].pos.x, mainZone.spots[rPortal].pos.y, 0.0f);
+        portalPos = new Vector3(mainZone.spots[rPortal].pos.x, mainZone.spots[rPortal].pos.y, 0.0f);
         //Player
         GameObject tilePrefab = player;
         Vector3 prefabPosition = tilePrefab.transform.position;
@@ -326,12 +373,14 @@ public class CaveGenerator : MonoBehaviour
         prefabPosition.y = mainZone.spots[random].pos.y;
         tilePrefab.GetComponent<Player>().InstantiateHelp(hpSlider, spSlider, staminaSlider, weedText, mainCamera, WeedQnt, portalPos);
         GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
-        //playerRef = newTile.GetComponent<Player>();
+        playerRef = newTile.GetComponent<Player>();
 
-        //path = dijkstra.Pathfinding(new Vector2(prefabPosition.x, prefabPosition.y), new Vector2(portalPos.x, portalPos.y), GetComponent<CaveGenerator>());
+        //Debug.Log("pre-pathfinding");
+        //path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y), new Vector2(portalPos.x, portalPos.y));
+        //Debug.Log("pos-pathfinding");
 
-        Debug.Log(prefabPosition.x + ", " + prefabPosition.y + "\n" +
-            portalPos.x + ", " + portalPos.y + "\n");
+        //Debug.Log(prefabPosition.x + ", " + prefabPosition.y + "\n" +
+        //    portalPos.x + ", " + portalPos.y + "\n");
 
 
 
@@ -404,7 +453,7 @@ public class CaveGenerator : MonoBehaviour
         {
             potionsQnt = 5;
             enemiesQnt = 6;
-            WeedQnt = 10;
+            WeedQnt = 1;
             spotsQnt = 10;
         }
         else if (LevelSettings.level <= 6 && LevelSettings.level > 3)
@@ -439,69 +488,107 @@ public class CaveGenerator : MonoBehaviour
 
 public class Positions
 {
-
     public Vector2Int pos;
     public Queue<Positions> neighborns = new Queue<Positions>();
+    public List<Positions> newNeigh = new List<Positions>();
     public int counter;
     public bool hasNeighborns;
     public int travelCost = 1;
     public float totalTravelCost = Mathf.Infinity;
     public Positions parentPosition;
     public bool visited = false;
+    public int nIterator = 0;
 
     public void setPos(Vector2Int position)
     {
         pos = position;
     }
 
-    public void newNeighborn(int[,] maze, int width, int depht, int type)
+    public void newNeighborn(int[,] maze, int width, int depht, int type, CaveGenerator caveGenerator)
     {
-        neighborns.Clear();
         Vector2Int neigh = new Vector2Int();
-        Positions newNeigh = new Positions();
+        Positions[] posArray = caveGenerator.mainZone.Allpositions.ToArray();
+        float lowestDistance = Mathf.Infinity;
+        int closestDistanceIndex = 0;
 
         neigh.x = pos.x - 1;
         neigh.y = pos.y;
         if (neigh.x >= 0)
+        {
             if (maze[neigh.x, neigh.y] != type)
             {
-                newNeigh = new Positions();
-                newNeigh.setPos(neigh);
-                neighborns.Enqueue(newNeigh);
+                for (int i = 0; i < posArray.Length; i++)
+                {
+                    if (Vector2.Distance(neigh, posArray[i].pos) < lowestDistance)
+                    {
+                        lowestDistance = Vector2.Distance(neigh, posArray[i].pos);
+                        closestDistanceIndex = i;
+                    }
+                }
+                newNeigh.Add(posArray[closestDistanceIndex]);
+                //Debug.Log("Neigh added x-");
             }
+        }
 
+        lowestDistance = Mathf.Infinity;
         neigh.x = pos.x;
         neigh.y = pos.y - 1;
         if (neigh.y >= 0)
+        {
             if (maze[neigh.x, neigh.y] != type)
             {
-                newNeigh = new Positions();
-                newNeigh.setPos(neigh);
-                neighborns.Enqueue(newNeigh);
-
+                for (int i = 0; i < posArray.Length; i++)
+                {
+                    if (Vector2.Distance(neigh, posArray[i].pos) < lowestDistance)
+                    {
+                        lowestDistance = Vector2.Distance(neigh, posArray[i].pos);
+                        closestDistanceIndex = i;
+                    }
+                }
+                newNeigh.Add(posArray[closestDistanceIndex]);
+               // Debug.Log("Neigh added y-");
             }
+        }
 
+        lowestDistance = Mathf.Infinity;
         neigh.x = pos.x + 1;
         neigh.y = pos.y;
         if (neigh.x < depht)
+        {
             if (maze[neigh.x, neigh.y] != type)
             {
-                newNeigh = new Positions();
-                newNeigh.setPos(neigh);
-                neighborns.Enqueue(newNeigh);
-
+                for (int i = 0; i < posArray.Length; i++)
+                {
+                    if (Vector2.Distance(neigh, posArray[i].pos) < lowestDistance)
+                    {
+                        lowestDistance = Vector2.Distance(neigh, posArray[i].pos);
+                        closestDistanceIndex = i;
+                    }
+                }
+                newNeigh.Add(posArray[closestDistanceIndex]);
+                //Debug.Log("Neigh added x+");
             }
+        }
 
+        lowestDistance = Mathf.Infinity;
         neigh.x = pos.x;
         neigh.y = pos.y + 1;
         if (neigh.y < width)
+        {
             if (maze[neigh.x, neigh.y] != type)
             {
-                newNeigh = new Positions();
-                newNeigh.setPos(neigh);
-                neighborns.Enqueue(newNeigh);
-
+                for (int i = 0; i < posArray.Length; i++)
+                {
+                    if (Vector2.Distance(neigh, posArray[i].pos) < lowestDistance)
+                    {
+                        lowestDistance = Vector2.Distance(neigh, posArray[i].pos);
+                        closestDistanceIndex = i;
+                    }
+                }
+                newNeigh.Add(posArray[closestDistanceIndex]);
+                //Debug.Log("Neigh added y+");
             }
+        }
 
     }
 

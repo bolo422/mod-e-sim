@@ -48,6 +48,9 @@ public class Player : MonoBehaviour
     public Slider spSlider;
     public Slider staminaSlider;
 
+    private Vector2 moveDirection;
+    public float moveSpeed = 10;
+
     // A definir:
 
     // Se o jogo usar um Manager, a quantia de Weeds coletadas não pode ficar aqui, em cujo caso teria
@@ -100,12 +103,7 @@ public class Player : MonoBehaviour
     {
         updateBars();
         updateTexts();
-
-        float horizontalImpulse = Input.GetAxis("Horizontal");
-        float verticalImpulse = Input.GetAxis("Vertical");
-        Vector3 impulse = new Vector3(horizontalImpulse, verticalImpulse, 0);
-
-        GetComponent<Rigidbody2D>().MovePosition(transform.position + impulse * speed);
+        ProcessInputs();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -115,10 +113,38 @@ public class Player : MonoBehaviour
             }
         }
 
-
-
-
         GameOver();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    void ProcessInputs()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        if(moveX != 0 && moveY != 0)
+        {
+            moveX = moveX / 2;
+            moveY = moveY / 2;
+        }
+
+        moveDirection = new Vector2(moveX, moveY);
+
+        //Se nenhum input de moviment oestiver ativo, zera toda a física de movimento do rigidbody
+        if(moveX == 0 && moveY == 0)
+        { 
+            rb2d.velocity = Vector2.zero;
+            rb2d.angularVelocity = 0; rb2d.angularDrag = 0;
+        }
+    }
+
+    private void Move()
+    {
+        rb2d.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // primariamente colisão com o Inimigo (ou unicamente?)

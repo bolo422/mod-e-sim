@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dijkstra : MonoBehaviour
-{ 
+{
+    public CaveGenerator caveGenerator;
+    public int range = 50;
 
-    public Positions[] Pathfinding(Vector2 start, Vector2 end, CaveGenerator caveGenerator)
+    public Positions[] Pathfinding(Vector2 start, Vector2 end)
     {
+        Debug.Log("começando o pathfinding");
         //Return variable
         List<Positions> path = new List<Positions>();
         //List<Positions> visitedNodes = new List<Positions>();
@@ -15,6 +18,10 @@ public class Dijkstra : MonoBehaviour
         Positions endPosition = new Positions();
         Positions startPosition = new Positions();
 
+        List<Positions> unvisitedPositions = new List<Positions>();
+
+
+        int iterator = 0;
 
         Positions[] positionsArray = caveGenerator.mainZone.Allpositions.ToArray();
         float minDistanceStart = Mathf.Infinity;
@@ -22,11 +29,15 @@ public class Dijkstra : MonoBehaviour
 
         for (int i = 0; i < positionsArray.Length; i++)
         {
+            unvisitedPositions.Add(positionsArray[i]);
+            positionsArray[i].visited = false;
+            positionsArray[i].totalTravelCost = Mathf.Infinity;
             //start coord to Positions
             if (Vector2.Distance(start, positionsArray[i].pos) < minDistanceStart)
             {
                 minDistanceStart = Vector2.Distance(start, positionsArray[i].pos);
                 currentPosition = positionsArray[i];
+                startPosition = positionsArray[i];
             }
 
             //end coord to Positions
@@ -37,16 +48,23 @@ public class Dijkstra : MonoBehaviour
             }
         }
 
+        
+
         currentPosition.totalTravelCost = 0;
 
         bool visitedAll = false;
         while (!visitedAll)
+        //for (int k = 0; k < 4; k++)
         {
-
+            
+            iterator++;
+            currentPosition.nIterator = iterator;
+            //Debug.Log("IT: " + iterator);
             //Set new neighborns
-            currentPosition.newNeighborn(caveGenerator.map, caveGenerator.height, caveGenerator.width, 1);
+            currentPosition.newNeighborn(caveGenerator.map, caveGenerator.height, caveGenerator.width, 1, caveGenerator);
             currentPosition.visited = true;
-            Positions[] tempArray = currentPosition.neighborns.ToArray();
+            unvisitedPositions.Remove(currentPosition);
+            Positions[] tempArray = currentPosition.newNeigh.ToArray();
 
             //Loop trough neighborns and set they TTC
             for (int i = 0; i < tempArray.Length; i++)
@@ -55,11 +73,16 @@ public class Dijkstra : MonoBehaviour
                 {
                     tempArray[i].totalTravelCost = currentPosition.totalTravelCost + tempArray[i].travelCost;
                     tempArray[i].parentPosition = currentPosition;
+                    if(tempArray[i].totalTravelCost > range - 1)
+                    {
+                        unvisitedPositions.Remove(tempArray[i]);
+                    }
+                    //Debug.Log("TTC setado: " + iterator);
                 }
             }
 
             //Set Nearest Unvisited Position as the next currentPosition
-            float lowestTTC = Mathf.Infinity;
+            float lowestTTC = range;
             visitedAll = true;
             for (int i = 0; i < tempArray.Length; i++)
             {
@@ -70,16 +93,35 @@ public class Dijkstra : MonoBehaviour
                     visitedAll = false;
                 }
             }
+
+            //lowestTTC = Mathf.Infinity;
+            if (visitedAll && unvisitedPositions.Count > 0)
+            {
+                for (int i = 0; i < unvisitedPositions.Count; i++)
+                {
+                    if (unvisitedPositions[i].totalTravelCost < range)
+                    {
+                        currentPosition = unvisitedPositions[i];
+                        visitedAll = false;
+                        break;
+                    }
+                }
+            }
         }
 
-        path.Add(endPosition);
-
-        while (endPosition != startPosition)
+        if (endPosition.visited)
         {
-            path.Add(endPosition.parentPosition);
-            endPosition = endPosition.parentPosition;
+            path.Add(endPosition);
+            while (endPosition != startPosition)
+            {
+                //Debug.Log("adding path node: " + endPosition.parentPosition.nIterator);
+                path.Add(endPosition.parentPosition);
+                endPosition = endPosition.parentPosition;
+            }
+            path.Reverse();
         }
 
+        Debug.Log("finalizando o pathfinding");
         return path.ToArray();
     }
 }
