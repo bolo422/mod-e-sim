@@ -66,10 +66,10 @@ public class CaveGenerator : MonoBehaviour
         //}
 
 
-        for (int i = 0; i < path.Length; i++)
-        {
-            Debug.Log(path[i].travelCost);
-        }
+        //for (int i = 0; i < path.Length; i++)
+        //{
+        //    Debug.Log(path[i].travelCost);
+        //}
     }
 
     // Update is called once per frame
@@ -356,7 +356,7 @@ public class CaveGenerator : MonoBehaviour
             backup.Dequeue();
         }
 
-        Debug.Log(" 1: " + mainZone.spots.Length);
+        //Debug.Log(" 1: " + mainZone.spots.Length);
 
     }
 
