@@ -429,7 +429,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2094,7 +2094,7 @@ MonoBehaviour:
   randomFillPercent: 40
   seed: 0
   useRandomSeed: 1
-  smooth: 5
+  smooth: 2
   tileset: {fileID: 526412259614827206, guid: aa9da5c8f4bac5544bf3586793b5a239, type: 3}
   tilesetFlood: {fileID: 526412259614827206, guid: da29111fcc6f5a64aa0bda2b9cb6c0c5, type: 3}
   tilesetMain: {fileID: 526412259614827206, guid: 2105be3772dd0f24b8e2c520a4a32f99, type: 3}

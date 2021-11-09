@@ -30,7 +30,7 @@ public class EnemyShooter : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyNet = new PetriNet("Assets/Networks/enemy.pflow");
         HP = enemyNet.GetPlaceByLabel("HP");
-        enemyNet.GetPlaceByLabel("#AddHP").AddTokens(maxHP);
+        enemyNet.GetPlaceByLabel("#AddHP").AddTokens(maxHP + (LevelSettings.level * 10));
 
         timeBtwShots = startTimeBtwShots;
     }
@@ -62,7 +62,8 @@ public class EnemyShooter : MonoBehaviour
         //atirar e timer
         if (timeBtwShots <= 0 && distanceToPlayer < (stoppingDistance + retreatDistance/2))
         {
-            Instantiate(projectile, transform.position, Quaternion.identity);
+            GameObject shot = Instantiate(projectile, transform.position, Quaternion.identity);
+            shot.GetComponent<EnemyProjectile>().damage = damage;
             timeBtwShots = startTimeBtwShots;
         }
         else
@@ -71,6 +72,10 @@ public class EnemyShooter : MonoBehaviour
         }
     }
 
+    //public void addHP(int hpToAdd)
+    //{
+    //    enemyNet.GetPlaceByLabel("#AddHP").Tokens = hpToAdd;
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {        

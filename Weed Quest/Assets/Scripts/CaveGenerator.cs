@@ -47,9 +47,8 @@ public class CaveGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        randomFillPercent += LevelSettings.level * 2;
-
-        Debug.Log("Random Fill: " + randomFillPercent + "%");
+        //randomFillPercent += LevelSettings.level * 2;
+        //randomFillPercent += Mathf.FloorToInt(LevelSettings.level * 1.25f);
 
         setupObjectsQnt();
         generateCave();             
@@ -70,6 +69,8 @@ public class CaveGenerator : MonoBehaviour
         //{
         //    Debug.Log(path[i].travelCost);
         //}
+
+        spotsQnt = -1; // Remover quando isso finalmente for usado
     }
 
     // Update is called once per frame
@@ -400,6 +401,16 @@ public class CaveGenerator : MonoBehaviour
             prefabPosition.x = mainZone.spots[random].pos.x;
             prefabPosition.y = mainZone.spots[random].pos.y;
             newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+            if(newTile.GetComponent<Enemy>() != null)
+            {
+                newTile.GetComponent<Enemy>().damage += LevelSettings.level;
+                //newTile.GetComponent<Enemy>().addHP(LevelSettings.level * 15);
+            }
+            else
+            {
+                newTile.GetComponent<EnemyShooter>().damage += LevelSettings.level;
+                //newTile.GetComponent<EnemyShooter>().addHP(LevelSettings.level * 10);
+            }
         }
 
         //Weed
@@ -448,31 +459,43 @@ public class CaveGenerator : MonoBehaviour
         }
 
     }
-
-    void setupObjectsQnt()
+    // 1 + 2 + 3 + 4 + 5 + 6 == 21
+    // 10 = 30%
+    // 2% > 4% > 6% 
+    void setupObjectsQnt() // Trocar o fixo para um algoritmo que utilize o randômico que iremos implementar para dar variação e continuidade às fases
     {
+        //randomFillPercent += Mathf.FloorToInt(LevelSettings.level * 2f);
+
         if (LevelSettings.level <= 3)
         {
-            potionsQnt = 5;
-            enemiesQnt = 6;
-            WeedQnt = 1;
-            spotsQnt = 10;
+            randomFillPercent = new int();
+            randomFillPercent = Mathf.FloorToInt(((LevelSettings.level * 2) + 30) + Random.Range(0, Mathf.RoundToInt(0.75f * LevelSettings.level + 1)));
+            potionsQnt = 6;
+            enemiesQnt = 25 - Random.Range(Mathf.RoundToInt(LevelSettings.level / 2), Mathf.RoundToInt(3f * LevelSettings.level + 1));
+            WeedQnt = 4;
+            //spotsQnt = 10;
         }
         else if (LevelSettings.level <= 6 && LevelSettings.level > 3)
         {
-            potionsQnt = 2;
-            enemiesQnt = 3;
-            WeedQnt = 5;
-            spotsQnt = -1;
+            randomFillPercent = new int();
+            randomFillPercent = Mathf.FloorToInt(((LevelSettings.level * 2) + 30) + Random.Range(0, Mathf.RoundToInt(0.75f * LevelSettings.level)));
+            potionsQnt = 4;
+            enemiesQnt = 15 - Random.Range(Mathf.RoundToInt(LevelSettings.level / 2), Mathf.RoundToInt(1f * LevelSettings.level));
+            WeedQnt = 3;
+            //spotsQnt = -1;
         }
         else
         {
+            randomFillPercent = new int();
+            randomFillPercent = Mathf.FloorToInt(((LevelSettings.level * 2) + 30) + Random.Range(0, Mathf.RoundToInt(0.75f * LevelSettings.level)));
             potionsQnt = 1;
-            enemiesQnt = 2;
+            enemiesQnt = 5;
             WeedQnt = 2;
-            spotsQnt = -1;
+            //spotsQnt = -1;
         }
 
+        Debug.Log("Random Fill: " + randomFillPercent + "%");
+        Debug.Log("Level: " + LevelSettings.level);
     }
 
     void setTravelCost(int cost)

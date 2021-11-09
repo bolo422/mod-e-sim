@@ -8,7 +8,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private Transform player;
     private Vector2 target;
-    private int damage;
+    public int damage;
 
     // Start is called before the first frame update
     void Start()

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+
     public PetriNet enemyNet;
     public float speed;
     public Vector3 direction = Vector3.up;//(0,0,0)
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
     public int maxHP; // define HP máxima do jogador
     public Place HP; // a HP do jogador
     public int damage;
+    public Place HPAdder;
     
     
 
@@ -28,8 +30,10 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         HP = enemyNet.GetPlaceByLabel("HP");
-        enemyNet.GetPlaceByLabel("#AddHP").Tokens = maxHP;
+        HPAdder = enemyNet.GetPlaceByLabel("#AddHP");
+        HPAdder.Tokens = maxHP + (LevelSettings.level * 15);
 
+        //enemyNet.GetPlaceByLabel("#AddHP").Tokens = maxHP;
     }
 
     // Update is called once per frame
@@ -43,8 +47,13 @@ public class Enemy : MonoBehaviour
         //transform.position += direction * speed;
         //transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime*2);
         //rb.AddForce(direction * speed,ForceMode2D.Impulse);
-        rb.velocity += new Vector2(direction.x, direction.y) * Time.deltaTime;
+        rb.velocity += new Vector2(direction.x, direction.y) * Time.deltaTime * speed;
     }
+
+    //public void addHP(int hpToAdd)
+    //{
+    //    HPAdder.Tokens = hpToAdd;
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {        
@@ -83,7 +92,7 @@ public class Enemy : MonoBehaviour
         IEnumerator changeDirection()
     {
         running = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         direction.x = Random.Range(-1, 2);
         direction.y = Random.Range(-1, 2);
         running = false;
