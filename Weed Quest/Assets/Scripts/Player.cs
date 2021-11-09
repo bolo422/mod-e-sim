@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     
     public Place NextLevel;
     public GameObject portalPrefab;
+    public GameObject actualPortal;
     public bool portalCreated = false;
     public Vector3 portalPos;
 
@@ -96,6 +97,8 @@ public class Player : MonoBehaviour
         StartCoroutine(StaminaDecay()); // inicia o decay natural de Stamina do player
         StartCoroutine(ManaRegen()); // inicia a regen natural de Mana do player
         StartCoroutine(testInitialized());
+
+        StartCoroutine(instantiatePortal());
     }
 
     //* Update is called once per frame
@@ -103,7 +106,6 @@ public class Player : MonoBehaviour
     {
         updateBars();
         updateTexts();
-        ProcessInputs();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -113,39 +115,10 @@ public class Player : MonoBehaviour
             }
         }
 
+        checkForSurplus();
         GameOver();
     }
 
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    void ProcessInputs()
-    {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-
-        if(moveX != 0 && moveY != 0)
-        {
-            moveX = moveX / 2;
-            moveY = moveY / 2;
-        }
-
-        moveDirection = new Vector2(moveX, moveY);
-
-        //Se nenhum input de moviment oestiver ativo, zera toda a física de movimento do rigidbody
-        if(moveX == 0 && moveY == 0)
-        { 
-            rb2d.velocity = Vector2.zero;
-            rb2d.angularVelocity = 0; rb2d.angularDrag = 0;
-        }
-    }
-
-    private void Move()
-    {
-        rb2d.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-    }
 
     private void OnCollisionEnter2D(Collision2D collision) // primariamente colisão com o Inimigo (ou unicamente?)
     {
@@ -178,13 +151,20 @@ public class Player : MonoBehaviour
         {
             collision.gameObject.SetActive(false); // desabilita a weed, para não ser coletada 2 vezes
             playerNet.GetPlaceByLabel("#@WeedPickup").AddTokens(1);
-            StartCoroutine(instantiatePortal());
+
+            if (maxWeed - Weed.Tokens == 0)
+            {
+                actualPortal.GetComponent<Animator>().SetBool("isActive", true);
+            }
         }
         else if (collision.gameObject.CompareTag("portal"))
         {
-            Debug.Log("Voce venceu!");
-            LevelSettings.level += 1;
-            SceneManager.LoadScene("Loader");
+            if (collision.gameObject.GetComponent<Animator>().GetBool("isActive") == true)
+            {
+                Debug.Log("Voce venceu!");
+                LevelSettings.level += 1;
+                SceneManager.LoadScene("Loader");
+            }
         }
         // Se a Weed ficar dentro do Player, vai ter mais uma verificação por ela, dentro do Else abaixo
         else
@@ -255,12 +235,15 @@ public class Player : MonoBehaviour
 
     IEnumerator instantiatePortal()
     {
-        yield return new WaitForSeconds(2);
-        if (maxWeed - Weed.Tokens == 0 && !portalCreated)
+        yield return new WaitForSeconds(0.5f);
+        //if (maxWeed - Weed.Tokens == 0 && !portalCreated)
+        if (!portalCreated)
         {
-            Instantiate(portalPrefab, portalPos, new Quaternion(0, 0, 0, 0));
+            portalCreated = true;
+            actualPortal = Instantiate(portalPrefab, portalPos, new Quaternion(0, 0, 0, 0));
             Debug.Log("portal instanciado!");
             //Instantiate(portalPrefab, transform.position, transform.rotation);
+            actualPortal.GetComponent<Animator>().SetBool("isActive", false);
         }  
     }
 

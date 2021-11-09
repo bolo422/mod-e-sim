@@ -48,6 +48,9 @@ public class CaveGenerator : MonoBehaviour
     void Start()
     {
         randomFillPercent += LevelSettings.level * 2;
+
+        Debug.Log("Random Fill: " + randomFillPercent + "%");
+
         setupObjectsQnt();
         generateCave();             
         setMainZone();
@@ -67,7 +70,6 @@ public class CaveGenerator : MonoBehaviour
         {
             Debug.Log(path[i].travelCost);
         }
-
     }
 
     // Update is called once per frame
@@ -315,14 +317,14 @@ public class CaveGenerator : MonoBehaviour
                         p.y = y;
                         GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
                     }
-                    if (map[x, y] == 4)
-                    {
-                        GameObject tilePrefab = tileGround1;
-                        Vector3 p = tilePrefab.transform.position;
-                        p.x = x;
-                        p.y = y;
-                        GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
-                    }
+                    //if (map[x, y] == 4)
+                    //{
+                    //    GameObject tilePrefab = tileGround1;
+                    //    Vector3 p = tilePrefab.transform.position;
+                    //    p.x = x;
+                    //    p.y = y;
+                    //    GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+                    //}
                 }
             }
         }

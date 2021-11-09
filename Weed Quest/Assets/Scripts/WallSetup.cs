@@ -21,6 +21,8 @@ public class WallSetup : MonoBehaviour
         forestSprite = GameObject.Find("ForestSpriteHolder").GetComponent<SpriteHolder>();
         StartCoroutine(setupCoroutine());
 
+        maxX = caveManager.width;
+        maxY = caveManager.height;
     }
 
     public void setCaveParent(GameObject cave)
@@ -40,56 +42,56 @@ public class WallSetup : MonoBehaviour
         if (cX >= 2 && cX <= maxX - 3 && cY >= 2 && cY <= maxY - 3)
         {
             // Arbustos 1x1
-            if (caveManager.map[cX - 1, cY] == 2 && caveManager.map[cX + 1, cY] == 2 && caveManager.map[cX, cY + 1] == 2 ||
-                caveManager.map[cX - 1, cY] == 2 && caveManager.map[cX + 1, cY] == 2 && caveManager.map[cX, cY - 1] == 2 ||
-                caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX + 1, cY] == 2 ||
-                caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX - 1, cY] == 2)
+            if (caveManager.map[cX - 1, cY] != 1 && caveManager.map[cX + 1, cY] != 1 && caveManager.map[cX, cY + 1] != 1 ||
+                caveManager.map[cX - 1, cY] != 1 && caveManager.map[cX + 1, cY] != 1 && caveManager.map[cX, cY - 1] != 1 ||
+                caveManager.map[cX, cY + 1] != 1 && caveManager.map[cX, cY - 1] != 1 && caveManager.map[cX + 1, cY] != 1 ||
+                caveManager.map[cX, cY + 1] != 1 && caveManager.map[cX, cY - 1] != 1 && caveManager.map[cX - 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[22];
             }
             // Cima/Baixo
-            else if (caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX - 1, cY] == 1 && caveManager.map[cX + 1, cY] == 1)
+            else if (caveManager.map[cX, cY - 1] != 1 && caveManager.map[cX - 1, cY] == 1 && caveManager.map[cX + 1, cY] == 1)
             {
                 sprite.sprite = forestSprite.forestSprites[15];
             }
-            else if (caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX - 1, cY] == 1 && caveManager.map[cX + 1, cY] == 1)
+            else if (caveManager.map[cX, cY + 1] != 1 && caveManager.map[cX - 1, cY] == 1 && caveManager.map[cX + 1, cY] == 1)
             {
                 sprite.sprite = forestSprite.forestSprites[1];
             }
             // Cantos Exteriores
-            else if (caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX - 1, cY] == 2)
+            else if (caveManager.map[cX, cY + 1] != 1 && caveManager.map[cX - 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[0];
             }
-            else if (caveManager.map[cX, cY + 1] == 2 && caveManager.map[cX + 1, cY] == 2)
+            else if (caveManager.map[cX, cY + 1] != 1 && caveManager.map[cX + 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[2];
             }
-            else if (caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX - 1, cY] == 2)
+            else if (caveManager.map[cX, cY - 1] != 1 && caveManager.map[cX - 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[14];
             }
-            else if (caveManager.map[cX, cY - 1] == 2 && caveManager.map[cX + 1, cY] == 2)
+            else if (caveManager.map[cX, cY - 1] != 1 && caveManager.map[cX + 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[16];
             }
             // Esquerda/Direita
-            else if (caveManager.map[cX, cY - 1] == 1 && caveManager.map[cX, cY + 1] == 1 && caveManager.map[cX + 1, cY] == 2)
+            else if (caveManager.map[cX, cY - 1] == 1 && caveManager.map[cX, cY + 1] == 1 && caveManager.map[cX + 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[9];
             }
-            else if (caveManager.map[cX, cY - 1] == 1 && caveManager.map[cX, cY + 1] == 1 && caveManager.map[cX - 1, cY] == 2)
+            else if (caveManager.map[cX, cY - 1] == 1 && caveManager.map[cX, cY + 1] == 1 && caveManager.map[cX - 1, cY] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[7];
             }
             // Cantos Interiores Diagonais
-            else if (caveManager.map[cX + 1, cY + 1] == 2)
+            else if (caveManager.map[cX + 1, cY + 1] != 1)
             {
-                if (caveManager.map[cX + 1, cY + 1] == 2 && caveManager.map[cX + 1, cY - 1] == 2 && caveManager.map[cX + 2, cY] == 2) // Se do lado tem um arbusto, se torna um lado normal
+                if (caveManager.map[cX + 1, cY + 1] != 1 && caveManager.map[cX + 1, cY - 1] != 1 && caveManager.map[cX + 2, cY] != 1) // Se do lado tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[9];
                 }
-                else if (caveManager.map[cX - 1, cY + 1] == 2 && caveManager.map[cX + 1, cY + 1] == 2 && caveManager.map[cX, cY + 2] == 2) // Se do lado tem um arbusto, se torna um lado normal
+                else if (caveManager.map[cX - 1, cY + 1] != 1 && caveManager.map[cX + 1, cY + 1] != 1 && caveManager.map[cX, cY + 2] != 1) // Se do lado tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[1];
                 }
@@ -98,13 +100,13 @@ public class WallSetup : MonoBehaviour
                     sprite.sprite = forestSprite.forestSprites[17];
                 }
             }
-            else if (caveManager.map[cX - 1, cY + 1] == 2)
+            else if (caveManager.map[cX - 1, cY + 1] != 1)
             {
-                if (caveManager.map[cX - 1, cY + 1] == 2 && caveManager.map[cX - 1, cY - 1] == 2 && caveManager.map[cX - 2, cY] == 2) // Se do lado tem um arbusto, se torna um lado normal
+                if (caveManager.map[cX - 1, cY + 1] != 1 && caveManager.map[cX - 1, cY - 1] != 1 && caveManager.map[cX - 2, cY] != 1) // Se do lado tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[7];
                 }
-                else if (caveManager.map[cX - 1, cY + 1] == 2 && caveManager.map[cX + 1, cY + 1] == 2 && caveManager.map[cX, cY + 2] == 2) // Se em cima tem um arbusto, se torna um lado normal
+                else if (caveManager.map[cX - 1, cY + 1] != 1 && caveManager.map[cX + 1, cY + 1] != 1 && caveManager.map[cX, cY + 2] != 1) // Se em cima tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[1];
                 }
@@ -113,13 +115,13 @@ public class WallSetup : MonoBehaviour
                     sprite.sprite = forestSprite.forestSprites[18];
                 }
             }
-            else if (caveManager.map[cX + 1, cY - 1] == 2)
+            else if (caveManager.map[cX + 1, cY - 1] != 1)
             {
-                if (caveManager.map[cX + 1, cY + 1] == 2 && caveManager.map[cX + 1, cY - 1] == 2 && caveManager.map[cX + 2, cY] == 2) // Se do lado tem um arbusto, se torna um lado normal
+                if (caveManager.map[cX + 1, cY + 1] != 1 && caveManager.map[cX + 1, cY - 1] != 1 && caveManager.map[cX + 2, cY] != 1) // Se do lado tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[9];
                 }
-                else if (caveManager.map[cX - 1, cY - 1] == 2 && caveManager.map[cX + 1, cY - 1] == 2 && caveManager.map[cX, cY - 2] == 2) // Se embaixo tem um arbusto, se torna um lado normal
+                else if (caveManager.map[cX - 1, cY - 1] != 1 && caveManager.map[cX + 1, cY - 1] != 1 && caveManager.map[cX, cY - 2] != 1) // Se embaixo tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[15];
                 }
@@ -128,13 +130,13 @@ public class WallSetup : MonoBehaviour
                     sprite.sprite = forestSprite.forestSprites[10];
                 }
             }
-            else if (caveManager.map[cX - 1, cY - 1] == 2)
+            else if (caveManager.map[cX - 1, cY - 1] != 1)
             {
-                if (caveManager.map[cX - 1, cY + 1] == 2 && caveManager.map[cX - 1, cY - 1] == 2 && caveManager.map[cX - 2, cY] == 2) // Se do lado tem um arbusto, se torna um lado normal
+                if (caveManager.map[cX - 1, cY + 1] != 1 && caveManager.map[cX - 1, cY - 1] != 1 && caveManager.map[cX - 2, cY] != 1) // Se do lado tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[7];
                 }
-                else if (caveManager.map[cX - 1, cY - 1] == 2 && caveManager.map[cX + 1, cY - 1] == 2 && caveManager.map[cX, cY - 2] == 2) // Se embaixo tem um arbusto, se torna um lado normal
+                else if (caveManager.map[cX - 1, cY - 1] != 1 && caveManager.map[cX + 1, cY - 1] != 1 && caveManager.map[cX, cY - 2] != 1) // Se embaixo tem um arbusto, se torna um lado normal
                 {
                     sprite.sprite = forestSprite.forestSprites[15];
                 }
@@ -144,7 +146,7 @@ public class WallSetup : MonoBehaviour
                 }
             }
             // Parte "alta" da árvore reta
-            else if (caveManager.map[cX, cY - 2] == 2)
+            else if (caveManager.map[cX, cY - 2] != 1)
             {
                 sprite.sprite = forestSprite.forestSprites[8];
             }
@@ -153,14 +155,14 @@ public class WallSetup : MonoBehaviour
             // Internos Diagonais Superiores, o código pega as slots erradas
             //else if (caveManager.map[cX, cY - 1] == 1 && caveManager.map[cX - 1, cY] == 1)
             //{
-            //    if (caveManager.map[cX - 2, cY] == 2 || caveManager.map[cX - 1, cY - 1] == 2 || caveManager.map[cX, cY - 2] == 2)
+            //    if (caveManager.map[cX - 2, cY] != 1 || caveManager.map[cX - 1, cY - 1] != 1 || caveManager.map[cX, cY - 2] != 1)
             //    {
             //        sprite.sprite = forestSprite.forestSprites[4];
             //    }
             //}
             //else if (caveManager.map[cX, cY - 1] == 1 && caveManager.map[cX + 1, cY] == 1)
             //{
-            //    if (caveManager.map[cX + 2, cY] == 2 || caveManager.map[cX + 1, cY - 1] == 2 || caveManager.map[cX, cY - 2] == 2)
+            //    if (caveManager.map[cX + 2, cY] != 1 || caveManager.map[cX + 1, cY - 1] != 1 || caveManager.map[cX, cY - 2] != 1)
             //    {
             //        sprite.sprite = forestSprite.forestSprites[3];
             //    }
