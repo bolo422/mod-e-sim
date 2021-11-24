@@ -20,6 +20,10 @@ public class Dijkstra : MonoBehaviour
 
         List<Positions> unvisitedPositions = new List<Positions>();
 
+        //int[,] map = caveGenerator.map;
+
+
+
 
         int iterator = 0;
 
