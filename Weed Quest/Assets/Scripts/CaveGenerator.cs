@@ -18,6 +18,7 @@ public class CaveGenerator : MonoBehaviour
     float xi = -1.0f;
     float yi = 1.0f;
     public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal, sparks;
+    public Pathfinding pathfinding;
     int WeedQnt;
     int enemiesQnt;
     int potionsQnt;
@@ -55,6 +56,7 @@ public class CaveGenerator : MonoBehaviour
         setTravelCost(3);
         drawCave();
         spawnObjects();
+        pathfinding.map = map;
 
         spotsQnt = -1; // Remover quando isso finalmente for usado
     }
@@ -243,6 +245,7 @@ public class CaveGenerator : MonoBehaviour
             {
                 for (int y = 0; y < height; y++)
                 {
+
                     if (map[x, y] == 1)
                     {
                         GameObject tilePrefab = tileset;
@@ -268,6 +271,7 @@ public class CaveGenerator : MonoBehaviour
                         p.x = x;
                         p.y = y;
                         GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+                        //prefab -> mainZone.Allpositions[i]; i++
                     }
                 }
             }
