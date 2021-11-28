@@ -14,7 +14,7 @@ public class CaveGenerator : MonoBehaviour
     public bool useRandomSeed;
     [Range(0, 5)]
     public int smooth;
-    public GameObject tileset, tilesetFlood, tilesetMain, tileGround1;
+    public GameObject tileset, tilesetFlood, tilesetMain, tileGround1, tileWater, destroyer;
     float xi = -1.0f;
     float yi = 1.0f;
     public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal, sparks;
@@ -43,13 +43,11 @@ public class CaveGenerator : MonoBehaviour
     Queue<Zones> zones = new Queue<Zones>();
     Queue<Zones> backup = new Queue<Zones>();
     public Zones mainZone = new Zones();
+    Zones floodedZone = new Zones();
 
     // Start is called before the first frame update
     void Start()
     {
-        //randomFillPercent += LevelSettings.level * 2;
-        //randomFillPercent += Mathf.FloorToInt(LevelSettings.level * 1.25f);
-
         setupObjectsQnt();
         generateCave();             
         setMainZone();
@@ -57,18 +55,6 @@ public class CaveGenerator : MonoBehaviour
         setTravelCost(3);
         drawCave();
         spawnObjects();
-
-        //for (int i = 0; i < mainZone.spots.Length; i++)
-        //{
-        //    if(mainZone.spots[i].travelCost != 0)
-        //        Debug.Log(mainZone.spots[i].travelCost + "\n");
-        //}
-
-
-        //for (int i = 0; i < path.Length; i++)
-        //{
-        //    Debug.Log(path[i].travelCost);
-        //}
 
         spotsQnt = -1; // Remover quando isso finalmente for usado
     }
@@ -78,14 +64,14 @@ public class CaveGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            generateCave();
+            //eventSpawn("hp", 50);
+            createFloodArea(true);
         }
 
         if (Input.GetKey(KeyCode.K))
         {
             path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y),
-                //new Vector2(50, 25));
-                new Vector2(portalPos.x, portalPos.y));
+            new Vector2(portalPos.x, portalPos.y));
 
             if (path.Length > 0)
             {
@@ -108,17 +94,6 @@ public class CaveGenerator : MonoBehaviour
     void OnDrawGizmos()
     {
 #if UNITY_EDITOR
-
-        //if(path.Length > 0)
-        //{
-        //    for (int i = 0; i < path.Length; i++)
-        //    {
-        //        Handles.Label(
-        //        new Vector3(path[i].pos.x, path[i].pos.y, 100),
-        //        path[i].totalTravelCost.ToString());
-        //    }
-        //}
-
         
         Positions[] testarray = mainZone.Allpositions.ToArray();
 
@@ -127,30 +102,7 @@ public class CaveGenerator : MonoBehaviour
             Handles.Label(
             new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
             testarray[i].totalTravelCost.ToString());
-         }
-
-
-
-            //if(testarray[i].visited)
-            //{
-            //    Handles.Label(
-            //    new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
-            //    testarray[i].nIterator.ToString());
-            //}
-        
-
-
-
-
-            //string label;
-            //if(testarray[i].travelCost >= 85 && testarray[i].travelCost <= 94){ label = "m"; }
-            //else if(testarray[i].travelCost >= 95){ label = "D"; }
-            //else{ label = " "; }
-
-            //Handles.Label(
-            //new Vector3(testarray[i].pos.x, testarray[i].pos.y, 100),
-            //label);
-            
+         }            
         
 #endif
     }
@@ -192,7 +144,6 @@ public class CaveGenerator : MonoBehaviour
         if (useRandomSeed)
         {
             seed = Random.Range(0, 1000);
-            //Debug.Log(seed);
         }
 
         System.Random number = new System.Random(seed);
@@ -318,14 +269,6 @@ public class CaveGenerator : MonoBehaviour
                         p.y = y;
                         GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
                     }
-                    //if (map[x, y] == 4)
-                    //{
-                    //    GameObject tilePrefab = tileGround1;
-                    //    Vector3 p = tilePrefab.transform.position;
-                    //    p.x = x;
-                    //    p.y = y;
-                    //    GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
-                    //}
                 }
             }
         }
@@ -357,7 +300,6 @@ public class CaveGenerator : MonoBehaviour
             backup.Dequeue();
         }
 
-        //Debug.Log(" 1: " + mainZone.spots.Length);
 
     }
 
@@ -377,16 +319,6 @@ public class CaveGenerator : MonoBehaviour
         tilePrefab.GetComponent<Player>().InstantiateHelp(hpSlider, spSlider, staminaSlider, weedText, mainCamera, WeedQnt, portalPos);
         GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
         playerRef = newTile.GetComponent<Player>();
-
-        //Debug.Log("pre-pathfinding");
-        //path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y), new Vector2(portalPos.x, portalPos.y));
-        //Debug.Log("pos-pathfinding");
-
-        //Debug.Log(prefabPosition.x + ", " + prefabPosition.y + "\n" +
-        //    portalPos.x + ", " + portalPos.y + "\n");
-
-
-
 
         //Enemy
         for (int i = 0; i < enemiesQnt; i++)
@@ -509,6 +441,84 @@ public class CaveGenerator : MonoBehaviour
         }
     }
 
+    void eventSpawn(string type, int qnt)
+    {
+        GameObject tilePrefab = new GameObject();
+        int uses = qnt;
+
+        if (type == "enemy")
+            tilePrefab = enemy1;
+        else if (type == "enemy2")
+            tilePrefab = enemy2;
+        else if (type == "hp")
+            tilePrefab = hp;
+        else if (type == "sp")
+            tilePrefab = sp;
+        else if (type == "stamina")
+            tilePrefab = stamina;
+
+        while(uses != 0)
+        {
+            int randomPosition = Random.Range(0, mainZone.spots.Length);
+            Debug.Log(map[mainZone.spots[randomPosition].pos.x, mainZone.spots[randomPosition].pos.y]);
+            if (map[mainZone.spots[randomPosition].pos.x, mainZone.spots[randomPosition].pos.y] == 2) //Verifico se já tem algo naquela posição
+            {
+                Vector3 prefabPosition = tilePrefab.transform.position;
+                prefabPosition.x = mainZone.spots[randomPosition].pos.x;
+                prefabPosition.y = mainZone.spots[randomPosition].pos.y;
+                GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+                uses--;
+            }
+        }
+        
+    }
+
+    IEnumerator updateWater()
+    {        
+        while (enabled)
+        {
+            Debug.Log("After Main Zone: " + mainZone.spots.Length);
+            yield return new WaitForSeconds(2.5f);
+
+            int lenght = floodedZone.spots.Length;
+            for (int i = 0; i < lenght; i++)
+            {
+                while(floodedZone.spots[i].neighborns.Count != 0)
+                {
+                    floodedZone.spots[i].neighborns.Peek().setNeighbornFlood(map, height, width);
+                    floodedZone.addPosition(floodedZone.spots[i].neighborns.Peek());
+                    floodedZone.setSpots();
+                    removeSprite(floodedZone.spots[i].neighborns.Peek());
+                    Debug.Log("To be Removed: " + floodedZone.spots[i].neighborns.Peek().pos);
+                    mainZone.removePosition(floodedZone.spots[i].neighborns.Peek().pos);
+                    floodedZone.spots[i].neighborns.Dequeue();
+                }
+            }
+        }
+        Debug.Log("End Main Zone: " + mainZone.spots.Length);
+    }
+
+    void createFloodArea(bool coroutine = false)
+    {
+        Positions random = mainZone.spots[Random.Range(0, mainZone.spots.Length)];
+        random.setNeighbornFlood(map, height, width);
+        floodedZone.addPosition(random);
+        floodedZone.setSpots();
+        removeSprite(random);
+        mainZone.removePosition(random.pos);
+        if(coroutine)
+            StartCoroutine(updateWater());
+    }
+
+    void removeSprite(Positions pos)
+    {
+        GameObject tilePrefab = destroyer;
+        Vector3 p = tilePrefab.transform.position;
+        p.x = pos.pos.x;
+        p.y = pos.pos.y;
+        GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+    }
+
 }
 
 public class Positions
@@ -516,6 +526,7 @@ public class Positions
     public Vector2Int pos;
     public Queue<Positions> neighborns = new Queue<Positions>();
     public List<Positions> newNeigh = new List<Positions>();
+    public GameObject prefab = new GameObject();
     public int counter;
     public bool hasNeighborns;
     public int travelCost = 1;
@@ -617,7 +628,7 @@ public class Positions
 
     }
 
-    public void setNeighborn(int[,] maze, int width, int depht, int newCounter)
+    public void setNeighbornFlood(int[,] maze, int width, int depht)
     {
         Vector2Int neigh = new Vector2Int();
         Positions newNeigh = new Positions();
@@ -625,48 +636,100 @@ public class Positions
         neigh.x = pos.x - 1;
         neigh.y = pos.y;
         if (neigh.x >= 0)
-            if (maze[neigh.x, neigh.y] == 0)
+            if (maze[neigh.x, neigh.y] > 1)
             {
+                maze[neigh.x, neigh.y] = -1;
                 newNeigh = new Positions();
                 newNeigh.setPos(neigh);
-                newNeigh.counter = newCounter;
                 neighborns.Enqueue(newNeigh);
             }
 
         neigh.x = pos.x;
         neigh.y = pos.y - 1;
         if (neigh.y >= 0)
-            if (maze[neigh.x, neigh.y] == 0)
+            if (maze[neigh.x, neigh.y] > 1)
             {
+                maze[neigh.x, neigh.y] = -1;
                 newNeigh = new Positions();
                 newNeigh.setPos(neigh);
-                newNeigh.counter = newCounter;
                 neighborns.Enqueue(newNeigh);
             }
 
         neigh.x = pos.x + 1;
         neigh.y = pos.y;
         if (neigh.x < depht)
-            if (maze[neigh.x, neigh.y] == 0)
+            if (maze[neigh.x, neigh.y] > 1)
             {
+                maze[neigh.x, neigh.y] = -1;
                 newNeigh = new Positions();
                 newNeigh.setPos(neigh);
-                newNeigh.counter = newCounter;
                 neighborns.Enqueue(newNeigh);
             }
 
         neigh.x = pos.x;
         neigh.y = pos.y + 1;
         if (neigh.y < width)
-            if (maze[neigh.x, neigh.y] == 0)
+            if (maze[neigh.x, neigh.y] > 1)
             {
+                maze[neigh.x, neigh.y] = -1;
                 newNeigh = new Positions();
                 newNeigh.setPos(neigh);
-                newNeigh.counter = newCounter;
                 neighborns.Enqueue(newNeigh);
             }
 
+
     }
+
+    public void setNeighborn(int[,] maze, int width, int depht, int newCounter)
+        {
+            Vector2Int neigh = new Vector2Int();
+            Positions newNeigh = new Positions();
+
+            neigh.x = pos.x - 1;
+            neigh.y = pos.y;
+            if (neigh.x >= 0)
+                if (maze[neigh.x, neigh.y] == 0)
+                {
+                    newNeigh = new Positions();
+                    newNeigh.setPos(neigh);
+                    newNeigh.counter = newCounter;
+                    neighborns.Enqueue(newNeigh);
+                }
+
+            neigh.x = pos.x;
+            neigh.y = pos.y - 1;
+            if (neigh.y >= 0)
+                if (maze[neigh.x, neigh.y] == 0)
+                {
+                    newNeigh = new Positions();
+                    newNeigh.setPos(neigh);
+                    newNeigh.counter = newCounter;
+                    neighborns.Enqueue(newNeigh);
+                }
+
+            neigh.x = pos.x + 1;
+            neigh.y = pos.y;
+            if (neigh.x < depht)
+                if (maze[neigh.x, neigh.y] == 0)
+                {
+                    newNeigh = new Positions();
+                    newNeigh.setPos(neigh);
+                    newNeigh.counter = newCounter;
+                    neighborns.Enqueue(newNeigh);
+                }
+
+            neigh.x = pos.x;
+            neigh.y = pos.y + 1;
+            if (neigh.y < width)
+                if (maze[neigh.x, neigh.y] == 0)
+                {
+                    newNeigh = new Positions();
+                    newNeigh.setPos(neigh);
+                    newNeigh.counter = newCounter;
+                    neighborns.Enqueue(newNeigh);
+                }
+
+        }
 
     public int getNeightbornQnt()
     {
@@ -700,9 +763,10 @@ public class Positions
 }
 
 
-public class Zones
+public class Zones : MonoBehaviour
 {
     public Queue<Positions> Allpositions = new Queue<Positions>();
+    Queue<Positions> backupAllpositions = new Queue<Positions>();
     public int size = 0;
     public Positions[] spots; 
 
@@ -711,6 +775,51 @@ public class Zones
         Allpositions.Enqueue(pos);
         size++;
     }
+    public void removePosition(Vector2Int pos)
+    {
+        bool end = false;
+        while (!end)
+        {
+            if(Allpositions.Count != 0)
+            {
+                if (Allpositions.Peek().pos == pos)
+                {
+                    Allpositions.Dequeue();
+                    while (backupAllpositions.Count != 0)
+                    {
+                        Allpositions.Enqueue(backupAllpositions.Peek());
+                        backupAllpositions.Dequeue();
+                    }
+                    setSpots();
+                    end = true;
+                }
+                else
+                {
+                    backupAllpositions.Enqueue(Allpositions.Peek());
+                    Allpositions.Dequeue();
+                    size--;
+                }
+            }
+            else
+            {
+                while (backupAllpositions.Count != 0)
+                {
+                    Allpositions.Enqueue(backupAllpositions.Peek());
+                    backupAllpositions.Dequeue();
+                }
+                setSpots();
+                end = true;
+            }
+            
+        }
+    }
+    public void spawnPrefab(Positions pos, GameObject tilePrefab)
+    {
+        Vector3 prefabPosition = tilePrefab.transform.position;
+        prefabPosition.x = pos.pos.x;
+        prefabPosition.y = pos.pos.y;
+        GameObject newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+    }
     public void setSpots()
     {
         spots = Allpositions.ToArray();
@@ -718,5 +827,7 @@ public class Zones
 
 
 }
+
+
 
 

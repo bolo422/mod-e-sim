@@ -2099,6 +2099,8 @@ MonoBehaviour:
   tilesetFlood: {fileID: 526412259614827206, guid: da29111fcc6f5a64aa0bda2b9cb6c0c5, type: 3}
   tilesetMain: {fileID: 526412259614827206, guid: 2105be3772dd0f24b8e2c520a4a32f99, type: 3}
   tileGround1: {fileID: 526412259614827206, guid: 09502285082a1f64d9cd5ad7f3553992, type: 3}
+  tileWater: {fileID: 526412259614827206, guid: 759424cf3b8522b48a8c624edd215428, type: 3}
+  destroyer: {fileID: 526412259614827206, guid: d28d347d98d766c4e86f32a1451e0b18, type: 3}
   player: {fileID: 6086933066195575927, guid: e901f86730e53e74e915efff6443dee2, type: 3}
   enemy1: {fileID: 9213847647495438333, guid: b278ad6f963a30b478bdbb1185934a99, type: 3}
   enemy2: {fileID: 8449547970972234864, guid: 41e9a15b0c1c9f64696e367fe4c33b13, type: 3}
@@ -2117,6 +2119,7 @@ MonoBehaviour:
   spSlider: {fileID: 1656914593}
   staminaSlider: {fileID: 1280087582}
   mainCamera: {fileID: 519420030}
+  mainZone: {fileID: 0}
 --- !u!4 &1775822081
 Transform:
   m_ObjectHideFlags: 0

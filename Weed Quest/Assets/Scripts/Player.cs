@@ -281,4 +281,9 @@ public class Player : MonoBehaviour
         spSlider.GetComponent<Slider>().value = SP.Tokens;
         staminaSlider.GetComponent<Slider>().value = Stamina.Tokens;
     }
+    public void forceGameOver()
+    {
+        Debug.Log("Voce perdeu :(");
+        SceneManager.LoadScene("Loader");
+    }
 }
