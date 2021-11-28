@@ -82,13 +82,7 @@ public class Pathfinding : MonoBehaviour
 
     }
 
- 
-
-
-
-
-
-
+    // Quando gerar os objetos, gerar emptyObjects que vão servir como Spots para gerar os inimigos
 
 
 }
