@@ -7,7 +7,9 @@ public class PlayerMovementComponent : MonoBehaviour
     GameObject Player;
     Vector2 moveDirection;
     public float moveSpeed;
+    float originalMoveSpeed;
     Rigidbody2D rb2d;
+    
 
     Vector2 lastPosition;
 
@@ -20,6 +22,7 @@ public class PlayerMovementComponent : MonoBehaviour
         Player = gameObject.transform.parent.gameObject;
         rb2d = Player.GetComponent<Rigidbody2D>();
         moveSpeed = Player.GetComponent<Player>().moveSpeed;
+        originalMoveSpeed = moveSpeed;
     }
 
     private void FixedUpdate()
@@ -74,6 +77,7 @@ public class PlayerMovementComponent : MonoBehaviour
     {
         collided = true;
         this.collision = collision;
+
     }
 
     public void OnCollisionExit2D(Collision2D collision)
@@ -90,7 +94,10 @@ public class PlayerMovementComponent : MonoBehaviour
         {
             rb2d.velocity = new Vector2(0, 0);
             rb2d.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+           // Debug.Log($"test: {rb2d.velocity}");
         }
     }
+
+
 }
 

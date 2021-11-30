@@ -38,6 +38,8 @@ public class Player : MonoBehaviour
     public bool portalCreated = false;
     public Vector3 portalPos;
 
+    public PlayerMovementComponent playerMovement;
+    private float PMSpeed;
 
     // Textos a serem atualizados, itens de UI, provavelmente não deviam estar aqui, mas a fins de praticidade:
     public Text hpText;
@@ -52,6 +54,12 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     public float moveSpeed = 10;
 
+    [HideInInspector]
+    public bool statueRange = false;
+    [HideInInspector]
+    public Statue statue;
+
+
     // A definir:
 
     // Se o jogo usar um Manager, a quantia de Weeds coletadas não pode ficar aqui, em cujo caso teria
@@ -63,6 +71,8 @@ public class Player : MonoBehaviour
     {
         mainCamera.player = gameObject;
         portalCreated = false;
+
+        PMSpeed = playerMovement.moveSpeed;
 
         rb2d = GetComponent<Rigidbody2D>(); // carrega o Rigidbody através do objeto em si
         playerNet = new PetriNet("Assets/Networks/player.pflow"); // carrega a PetriNet
@@ -112,6 +122,15 @@ public class Player : MonoBehaviour
             if (SP.Tokens >= 10 && Shield.Tokens != 1)
             {
                 StartCoroutine(StartShields());
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if(statueRange)
+            {
+                Debug.Log("player call draw path");
+                statue.drawPath();
             }
         }
 
@@ -166,10 +185,24 @@ public class Player : MonoBehaviour
                 SceneManager.LoadScene("Loader");
             }
         }
+        else if (collision.CompareTag("floor2"))
+        {
+            playerMovement.moveSpeed = PMSpeed * 0.3333f;
+            Debug.Log("Entering Difficult Terrain");
+        }
         // Se a Weed ficar dentro do Player, vai ter mais uma verificação por ela, dentro do Else abaixo
         else
         {
             // Verificação de se é um portal para a próxima fase ocorre aqui dentro
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("floor2"))
+        {
+            playerMovement.moveSpeed = PMSpeed;
+            Debug.Log("Exiting Difficult Terrain");
         }
     }
 
@@ -286,4 +319,7 @@ public class Player : MonoBehaviour
         Debug.Log("Voce perdeu :(");
         SceneManager.LoadScene("Loader");
     }
+
+
+
 }

@@ -2152,7 +2152,7 @@ MonoBehaviour:
   stamina: {fileID: 7487512781577295660, guid: ecb79262c21b62d4fb7959805d266a79, type: 3}
   weed: {fileID: 487023644440621057, guid: 4e94a3c827741b541860625773e538d3, type: 3}
   portal: {fileID: 1523311400100793365, guid: 9174781a915f3d043bb6551ecdcd9085, type: 3}
-  sparks: {fileID: 2101853562750388263, guid: b1e492f944befa14ea2d11af1ddf7a26, type: 3}
+  statue: {fileID: 487023644440621057, guid: beb68d334bc4890438bbd4a1148a12f0, type: 3}
   pathfinding: {fileID: 0}
   dijkstra: {fileID: 1775822082}
   hpText: {fileID: 0}
@@ -2191,7 +2191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caveGenerator: {fileID: 1775822080}
-  range: 50
 --- !u!1 &2064465621
 GameObject:
   m_ObjectHideFlags: 0

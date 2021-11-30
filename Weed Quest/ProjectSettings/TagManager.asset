@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - floor
+  - wall
+  - enemy
+  - potHP
+  - potSP
+  - potStamina
+  - weed
+  - portal
+  - floor2
+  - statue
   layers:
   - Default
   - TransparentFX

@@ -17,12 +17,14 @@ public class CaveGenerator : MonoBehaviour
     public GameObject tileset, tilesetFlood, tilesetMain, tileGround1, tileWater, destroyer;
     float xi = -1.0f;
     float yi = 1.0f;
-    public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal, sparks;
+    public GameObject player, enemy1, enemy2, hp, sp, stamina, weed, portal, statue;
     public Pathfinding pathfinding;
     int WeedQnt;
     int enemiesQnt;
     int potionsQnt;
+    int statueQnt;
     int spotsQnt, spotsSmooth;
+    int weedSpriteNumber = 0;
     Vector3 portalPos;
 
     Player playerRef;
@@ -70,27 +72,33 @@ public class CaveGenerator : MonoBehaviour
             createFloodArea(true);
         }
 
-        if (Input.GetKey(KeyCode.K))
-        {
-            path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y),
-            new Vector2(portalPos.x, portalPos.y));
 
-            if (path.Length > 0)
-            {
-                Debug.Log("Caminho encontrado!");
-                for (int i = 0; i < path.Length; i++)
-                {
-                    GameObject tilePrefab = sparks;
-                    Vector3 prefabPosition = new Vector3(path[i].pos.x, path[i].pos.y, 0);
-                    GameObject instant = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
-                }
-            }
-            else
-            {
-                Debug.Log("Caminho não encontrado!");
-            }
+        //ESTE MÉTODO FOI SUBSTITUIDO PELAS STATUES
+                    //
+                    //if (Input.GetKey(KeyCode.E))
+                    //{
+                    //    if (playerRef.statueRange == true) // IF separado para optimização, só verifica o status do player quando tem input
+                    //    {
+                    //        Debug.Log("test");
+                    //        path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y),
+                    //        new Vector2(portalPos.x, portalPos.y));
 
-        }
+                    //        if (path.Length > 0)
+                    //        {
+                    //            Debug.Log("Caminho encontrado!");
+                    //            for (int i = 0; i < path.Length; i++)
+                    //            {
+                    //                GameObject tilePrefab = sparks;
+                    //                Vector3 prefabPosition = new Vector3(path[i].pos.x, path[i].pos.y, 0);
+                    //                GameObject instant = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            Debug.Log("Caminho não encontrado!");
+                    //        }
+                    //    }
+                    //}
     }
 
     void OnDrawGizmos()
@@ -314,7 +322,7 @@ public class CaveGenerator : MonoBehaviour
         int rPortal = Random.Range(0, mainZone.spots.Length);
 
         //Portal
-        portalPos = new Vector3(mainZone.spots[rPortal].pos.x, mainZone.spots[rPortal].pos.y, 0.0f);
+        portalPos = new Vector3(mainZone.spots[rPortal].pos.x, mainZone.spots[rPortal].pos.y, 1.0f);
         //Player
         GameObject tilePrefab = player;
         Vector3 prefabPosition = tilePrefab.transform.position;
@@ -358,6 +366,11 @@ public class CaveGenerator : MonoBehaviour
             prefabPosition.x = mainZone.spots[random].pos.x;
             prefabPosition.y = mainZone.spots[random].pos.y;
             newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+            newTile.GetComponent<WeedSpriteSetup>().SetSprite(weedSpriteNumber);
+            if (weedSpriteNumber == 2)
+                weedSpriteNumber = 0;
+            else
+                weedSpriteNumber++;
             
         }
 
@@ -394,6 +407,18 @@ public class CaveGenerator : MonoBehaviour
             newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
         }
 
+        //Statue
+        for (int i = 0; i < statueQnt; i++)
+        {
+            random = Random.Range(0, mainZone.spots.Length);
+            tilePrefab = statue;
+            prefabPosition = tilePrefab.transform.position;
+            prefabPosition.x = mainZone.spots[random].pos.x;
+            prefabPosition.y = mainZone.spots[random].pos.y;
+            newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
+            newTile.GetComponent<Statue>().discoverPath(new Vector2(portalPos.x, portalPos.y), dijkstra);
+        }
+
     }
     // 1 + 2 + 3 + 4 + 5 + 6 == 21
     // 10 = 30%
@@ -407,6 +432,7 @@ public class CaveGenerator : MonoBehaviour
             randomFillPercent = new int();
             randomFillPercent = Mathf.FloorToInt(((LevelSettings.level * 2) + 30) + Random.Range(0, Mathf.RoundToInt(0.75f * LevelSettings.level + 1)));
             potionsQnt = 6;
+            statueQnt = 3;
             enemiesQnt = 25 - Random.Range(Mathf.RoundToInt(LevelSettings.level / 2), Mathf.RoundToInt(3f * LevelSettings.level + 1));
             WeedQnt = 4;
             //spotsQnt = 10;
@@ -416,6 +442,7 @@ public class CaveGenerator : MonoBehaviour
             randomFillPercent = new int();
             randomFillPercent = Mathf.FloorToInt(((LevelSettings.level * 2) + 30) + Random.Range(0, Mathf.RoundToInt(0.75f * LevelSettings.level)));
             potionsQnt = 4;
+            statueQnt = 2;
             enemiesQnt = 15 - Random.Range(Mathf.RoundToInt(LevelSettings.level / 2), Mathf.RoundToInt(1f * LevelSettings.level));
             WeedQnt = 3;
             //spotsQnt = -1;
@@ -425,6 +452,7 @@ public class CaveGenerator : MonoBehaviour
             randomFillPercent = new int();
             randomFillPercent = Mathf.FloorToInt(((LevelSettings.level * 2) + 30) + Random.Range(0, Mathf.RoundToInt(0.75f * LevelSettings.level)));
             potionsQnt = 1;
+            statueQnt = 1;
             enemiesQnt = 5;
             WeedQnt = 2;
             //spotsQnt = -1;

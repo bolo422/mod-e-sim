@@ -5,11 +5,10 @@ using UnityEngine;
 public class Dijkstra : MonoBehaviour
 {
     public CaveGenerator caveGenerator;
-    public int range = 50;
 
-    public Positions[] Pathfinding(Vector2 start, Vector2 end)
+    public Positions[] Pathfinding(Vector2 start, Vector2 end, int range = 500)
     {
-        Debug.Log("começando o pathfinding");
+        //Debug.Log("começando o pathfinding");
         //Return variable
         List<Positions> path = new List<Positions>();
         //List<Positions> visitedNodes = new List<Positions>();
@@ -125,7 +124,7 @@ public class Dijkstra : MonoBehaviour
             path.Reverse();
         }
 
-        Debug.Log("finalizando o pathfinding");
+        //Debug.Log("finalizando o pathfinding");
         return path.ToArray();
     }
 }
