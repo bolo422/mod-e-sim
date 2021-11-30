@@ -72,33 +72,6 @@ public class CaveGenerator : MonoBehaviour
             createFloodArea(true);
         }
 
-
-        //ESTE MÉTODO FOI SUBSTITUIDO PELAS STATUES
-                    //
-                    //if (Input.GetKey(KeyCode.E))
-                    //{
-                    //    if (playerRef.statueRange == true) // IF separado para optimização, só verifica o status do player quando tem input
-                    //    {
-                    //        Debug.Log("test");
-                    //        path = dijkstra.Pathfinding(new Vector2(playerRef.transform.position.x, playerRef.transform.position.y),
-                    //        new Vector2(portalPos.x, portalPos.y));
-
-                    //        if (path.Length > 0)
-                    //        {
-                    //            Debug.Log("Caminho encontrado!");
-                    //            for (int i = 0; i < path.Length; i++)
-                    //            {
-                    //                GameObject tilePrefab = sparks;
-                    //                Vector3 prefabPosition = new Vector3(path[i].pos.x, path[i].pos.y, 0);
-                    //                GameObject instant = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            Debug.Log("Caminho não encontrado!");
-                    //        }
-                    //    }
-                    //}
     }
 
     void OnDrawGizmos()
@@ -418,7 +391,9 @@ public class CaveGenerator : MonoBehaviour
             newTile = Instantiate(tilePrefab, prefabPosition, Quaternion.identity) as GameObject;
             newTile.GetComponent<Statue>().discoverPath(new Vector2(portalPos.x, portalPos.y), dijkstra);
         }
-
+        //Debug.Log("START FloodFillZone");
+        startFloodZone();
+        //Debug.Log("END FloodFillZone");
     }
     // 1 + 2 + 3 + 4 + 5 + 6 == 21
     // 10 = 30%
@@ -457,9 +432,17 @@ public class CaveGenerator : MonoBehaviour
             WeedQnt = 2;
             //spotsQnt = -1;
         }
-
+      
         Debug.Log("Random Fill: " + randomFillPercent + "%");
         Debug.Log("Level: " + LevelSettings.level);
+    }
+
+    IEnumerator startFloodZone()
+    {
+        Debug.Log("O mapa será inundado em 30 segundos");
+        yield return new WaitForSeconds(30);
+        Debug.Log("começando inundação");
+        createFloodArea(true);
     }
 
     void setTravelCost(int cost)
